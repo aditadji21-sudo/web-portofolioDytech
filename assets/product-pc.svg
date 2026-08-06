@@ -1,0 +1,20 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Placeholder foto produk kategori "PC Rakitan". Ganti dengan foto asli. -->
+  <defs>
+    <linearGradient id="pcBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EAF0FF" />
+      <stop offset="100%" stop-color="#DCE6FF" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#pcBg)" />
+  <g transform="translate(120,90)">
+    <rect x="0" y="0" width="150" height="220" rx="16" fill="#1B2340" />
+    <rect x="16" y="18" width="118" height="110" rx="8" fill="#0B0F1E" />
+    <circle cx="75" cy="73" r="36" fill="#2F5CF0" opacity="0.9" />
+    <circle cx="75" cy="73" r="36" fill="none" stroke="#8AA3FF" stroke-width="2" opacity="0.7" />
+    <rect x="16" y="140" width="118" height="9" rx="4.5" fill="#F6C623" />
+    <rect x="16" y="158" width="70" height="6" rx="3" fill="#4A5480" />
+    <rect x="16" y="172" width="70" height="6" rx="3" fill="#4A5480" />
+    <circle cx="118" cy="196" r="6" fill="#F0323B" />
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Placeholder brand mark for DYTECH Computer.
+    Ganti file ini (pertahankan nama "logo.svg" atau update import-nya di
+    components/Logo.tsx) untuk memakai logo asli toko.
+  -->
+  <defs>
+    <linearGradient id="logoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12183A" />
+      <stop offset="100%" stop-color="#06070B" />
+    </linearGradient>
+    <linearGradient id="logoRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F6C623" />
+      <stop offset="55%" stop-color="#2F5CF0" />
+      <stop offset="100%" stop-color="#F0323B" />
+    </linearGradient>
+    <radialGradient id="logoCore" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#5C82FF" />
+      <stop offset="100%" stop-color="#1B3AC4" />
+    </radialGradient>
+  </defs>
+
+  <rect width="120" height="120" rx="26" fill="url(#logoBg)" />
+
+  <circle cx="60" cy="60" r="44" fill="none" stroke="url(#logoRing)" stroke-width="2" stroke-dasharray="1.5 5" opacity="0.5" />
+
+  <path
+    d="M54 27 A33 33 0 1 1 54 93 A45 45 0 0 0 54 27 Z"
+    fill="none"
+    stroke="url(#logoRing)"
+    stroke-width="4"
+    opacity="0.95"
+  />
+
+  <circle cx="50" cy="60" r="16" fill="url(#logoCore)" />
+  <circle cx="50" cy="60" r="16" fill="none" stroke="#8AA3FF" stroke-width="1" opacity="0.6" />
+</svg>
