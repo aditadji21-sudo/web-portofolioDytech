@@ -34,7 +34,7 @@ export function Nav() {
         </div>
 
         <a
-          href="https://wa.me/6281200000000"
+          href="https://wa.me/62881026014897"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F6C623] text-[#12162A] font-body text-sm font-semibold hover:bg-[#e8b70f] transition-colors shrink-0"
@@ -84,7 +84,7 @@ export function Nav() {
             </Link>
           ))}
           <a
-            href="https://wa.me/6281200000000"
+            href="https://wa.me/62881026014897"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-1 text-center px-4 py-2.5 rounded-full bg-[#F6C623] text-[#12162A] font-semibold"
