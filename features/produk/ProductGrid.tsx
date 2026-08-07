@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { CATEGORIES, PRODUCTS } from "@/lib/constants";
 import { ProductCard } from "@/features/produk/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,14 +8,23 @@ import { Reveal } from "@/components/ui/Reveal";
 const FILTERS = ["Semua", ...CATEGORIES.map((c) => c.title)];
 
 export function ProductGrid() {
-  const [active, setActive] = useState("Semua");
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-  // Sinkron dengan ?kategori=... dari link kategori di Nav/Beranda,
-  // tanpa useSearchParams supaya tidak perlu Suspense boundary.
-  useEffect(() => {
-    const kategori = new URLSearchParams(window.location.search).get("kategori");
-    if (kategori && FILTERS.includes(kategori)) setActive(kategori);
-  }, []);
+  // 1. Baca nilai kategori langsung dari URL (menjadi Single Source of Truth)
+  const kategoriUrl = searchParams.get("kategori");
+  
+  // 2. Tentukan kategori aktif. Jika URL kosong atau tidak valid, kembali ke "Semua"
+  const active = (kategoriUrl && FILTERS.includes(kategoriUrl)) ? kategoriUrl : "Semua";
+
+  // 3. Fungsi ini akan mengubah URL saat tombol filter biru diklik
+  const handleCategoryClick = (f: string) => {
+    if (f === "Semua") {
+      router.push("/produk", { scroll: false }); // Hapus parameter untuk kategori "Semua"
+    } else {
+      router.push(`/produk?kategori=${f}`, { scroll: false }); // Ubah URL
+    }
+  };
 
   const filtered = active === "Semua" ? PRODUCTS : PRODUCTS.filter((p) => p.category === active);
 
@@ -28,7 +37,7 @@ export function ProductGrid() {
             return (
               <button
                 key={f}
-                onClick={() => setActive(f)}
+                onClick={() => handleCategoryClick(f)}
                 className={`font-body text-sm px-4 py-2 rounded-full border transition-colors duration-200 ${
                   isActive
                     ? "bg-[#2F5CF0] text-white border-[#2F5CF0]"

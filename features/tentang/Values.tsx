@@ -1,5 +1,6 @@
 import { VALUES } from "@/lib/constants";
 import { Reveal } from "@/components/ui/Reveal";
+import Image from "next/image"; 
 
 export function Values() {
   return (
@@ -18,10 +19,16 @@ export function Values() {
           {VALUES.map((v, i) => (
             <Reveal key={v.title} delay={i * 90}>
               <div className="relative rounded-2xl p-6 bg-[#F7F8FC] border border-[#EAECF5]">
-                <div
-                  className="w-10 h-10 rounded-xl mb-4"
-                  style={{ backgroundColor: v.accent }}
+                
+                {/* Bagian ini memanggil v.image dari constants.ts */}
+                <Image 
+                  src={v.image} 
+                  alt={v.title} 
+                  width={80} 
+                  height={80} 
+                  className="mb-4"
                 />
+
                 <h3 className="font-display font-semibold text-lg text-[#12162A] mb-2">{v.title}</h3>
                 <p className="font-body text-sm text-[#667085] leading-relaxed">{v.desc}</p>
               </div>

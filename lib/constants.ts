@@ -100,18 +100,18 @@ export const PRODUCTS: Product[] = [
     slug: "lenovo-loq-gaming",
     name: "Laptop Lenovo LOQ Gaming",
     category: "Laptop",
-    price: "Rp 13.900.000",
+    price: "Rp 15.950.000",
     specs: ["Core i7-13650HX", "RTX 4050 6GB", "16GB RAM", "512GB SSD"],
     badge: "Terlaris",
-    image: "/AdvanAnyar.svg",
+    image: "/LAPTOP LOQ 15ARP10E.svg",
   },
   {
     slug: "acer-aspire-lite",
-    name: "Laptop Acer Aspire Lite",
+    name: "Laptop Acer Aspire GO AG14",
     category: "Laptop",
-    price: "Rp 5.600.000",
-    specs: ["Ryzen 3 7320U", "8GB RAM", "512GB SSD", "14\" FHD"],
-    image: "/AdvanAnyar .svg",
+    price: "Rp 10.599.000",
+    specs: ["Core 5-120U", "16GB RAM", "512GB SSD", "14\" WUXGA", "WINDOWS 11 + OHS"],
+    image: "/AcerAspireGOAG14.svg",
   },
   {
     slug: "km100-mechanical",
@@ -132,6 +132,14 @@ export const PRODUCTS: Product[] = [
   {
     slug: "sonic-h7-headset",
     name: "Headset Gaming DYTECH Sonic H7",
+    category: "Aksesoris",
+    price: "Rp 275.000",
+    specs: ["7.1 Surround", "Mic Detachable", "Earcup Memory Foam"],
+    image: "/AdvanAnyar.svg",
+  },
+  {
+    slug: "ccihuy",
+    name: "Cihuy",
     category: "Aksesoris",
     price: "Rp 275.000",
     specs: ["7.1 Surround", "Mic Detachable", "Earcup Memory Foam"],
@@ -204,32 +212,38 @@ export const STORE_INFO = {
   ],
 };
 
+// 1. Tambahkan properti 'image' ke dalam tipe data ValueItem
 export type ValueItem = {
   title: string;
   desc: string;
   accent: string;
+  image: string; // <-- Tambahkan baris ini
 };
 
-// Bukan urutan proses, jadi sengaja tidak dinomori.
+// 2. Tambahkan nama file gambar ke masing-masing item
 export const VALUES: ValueItem[] = [
   {
     title: "Transparan",
     desc: "Estimasi biaya disampaikan di awal, sebelum unit disentuh teknisi.",
     accent: "#2F5CF0",
+    image: "/Transparan.svg", // <-- Sesuaikan dengan nama gambar 1 kamu
   },
   {
     title: "Bergaransi",
     desc: "Komponen dan jasa servis kami bergaransi resmi, bukan janji lisan.",
     accent: "#F6C623",
+    image: "/Bergaransi.svg", // <-- Sesuaikan dengan nama gambar 2 kamu
   },
   {
     title: "Cepat Tanggap",
     desc: "Sebagian besar servis selesai 1–3 hari kerja, tanpa antre berlarut-larut.",
     accent: "#F0323B",
+    image: "/Cepat tanggap.svg", // <-- Sesuaikan dengan nama gambar 3 kamu
   },
   {
     title: "Rekomendasi Jujur",
     desc: "Saran spek disesuaikan kebutuhan & budget, bukan sekadar jual yang mahal.",
     accent: "#2F5CF0",
+    image: "/Rekomendasi.svg", // <-- Sesuaikan dengan nama gambar 4 kamu
   },
 ];
