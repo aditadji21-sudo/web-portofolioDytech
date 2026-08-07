@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
+import { Suspense } from "react";
 import { CatalogHeader } from "@/features/produk/CatalogHeader";
 import { ProductGrid } from "@/features/produk/ProductGrid";
 
-export const metadata: Metadata = {
-  title: "Produk & Layanan — DYTECH Computer",
-  description: "Katalog PC rakitan, laptop, aksesoris, dan paket servis DYTECH Computer.",
-};
-
 export default function ProdukPage() {
   return (
-    <>
+    <main>
+      {/* CatalogHeader tidak perlu dibungkus karena tidak pakai searchParams */}
       <CatalogHeader />
-      <ProductGrid />
-    </>
+      
+      {/* ProductGrid WAJIB dibungkus Suspense karena pakai searchParams */}
+      <Suspense fallback={<div className="text-center py-20 text-[#667085]">Memuat data produk...</div>}>
+        <ProductGrid />
+      </Suspense>
+    </main>
   );
 }
