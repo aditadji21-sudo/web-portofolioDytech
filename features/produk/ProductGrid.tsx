@@ -1,7 +1,8 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { CATEGORIES, PRODUCTS } from "@/lib/constants";
+import { CATEGORIES } from "@/lib/constants";
+import { ALL_PRODUCTS } from "@/lib/all-products";
 import { ProductCard } from "@/features/produk/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -19,14 +20,15 @@ export function ProductGrid() {
 
   // 3. Fungsi ini akan mengubah URL saat tombol filter biru diklik
   const handleCategoryClick = (f: string) => {
-    if (f === "Semua") {
-      router.push("/produk", { scroll: false }); // Hapus parameter untuk kategori "Semua"
-    } else {
-      router.push(`/produk?kategori=${f}`, { scroll: false }); // Ubah URL
-    }
-  };
+      if (f === "Semua") {
+        router.push("/produk", { scroll: false });
+      } else {
+        // Kita bungkus f dengan encodeURIComponent agar simbol & aman dibaca URL
+        router.push(`/produk?kategori=${encodeURIComponent(f)}`, { scroll: false });
+      }
+    };
 
-  const filtered = active === "Semua" ? PRODUCTS : PRODUCTS.filter((p) => p.category === active);
+  const filtered = active === "Semua" ? ALL_PRODUCTS : ALL_PRODUCTS.filter((p) => p.category === active);
 
   return (
     <section className="px-4 sm:px-6 md:px-8 py-10 md:py-12">

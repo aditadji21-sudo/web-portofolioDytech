@@ -1,4 +1,4 @@
-import { OrbitMark } from "@/components/OrbitMark";
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function AboutHeader() {
@@ -14,15 +14,19 @@ export function AboutHeader() {
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
             DYTECH Computer berawal dari meja servis kecil di Malang. Sekarang kami merakit PC, menjual laptop
-            &amp; aksesoris, dan menangani servis — dengan prinsip yang sama sejak awal: jelaskan dulu, baru
-            kerjakan.
+            & aksesoris, dan menangani servis — dengan prinsip yang sama sejak awal: jelaskan dulu, baru kerjakan.
           </p>
         </Reveal>
 
+        {/* 2. Ini bagian kanan yang kita ganti jadi Image */}
         <Reveal delay={150} className="flex justify-center md:justify-end">
-          <div className="rounded-3xl bg-[#0E1226] p-10 md:p-12">
-            <OrbitMark size={200} />
-          </div>
+          <Image
+            src="/dytech uhuy.png" // <-- Ganti dengan nama file gambarmu yang ada di folder public
+            alt="DYTECH Computer"
+            width={1000} // Sesuaikan lebar gambarnya di sini
+            height={1000} // Sesuaikan tinggi gambarnya di sini
+            className="rounded-3xl object-cover shadow-xl"
+          />
         </Reveal>
       </div>
     </section>

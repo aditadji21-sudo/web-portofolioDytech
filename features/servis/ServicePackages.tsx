@@ -1,9 +1,9 @@
-import { PRODUCTS } from "@/lib/constants";
 import { ProductCard } from "@/features/produk/ProductCard";
+import { SERVIS } from "@/lib/Servis";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function ServicePackages() {
-  const services = PRODUCTS.filter((p) => p.category === "Servis & Upgrade");
+  const services = SERVIS;
 
   return (
     <section className="px-4 sm:px-6 md:px-8 py-16 md:py-20">

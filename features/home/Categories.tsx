@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { Cpu, Laptop2, MousePointerClick, Wrench } from "lucide-react";
-import { CATEGORIES, PRODUCTS, type Category } from "@/lib/constants";
+import { CATEGORIES, type Category } from '@/lib/constants';
+import { ALL_PRODUCTS } from '@/lib/all-products';
 import { Reveal } from "@/components/ui/Reveal";
 
 const ICONS = { cpu: Cpu, laptop: Laptop2, mouse: MousePointerClick, wrench: Wrench };
 
 function CategoryCircle({ item, delay }: { item: Category; delay: number }) {
   const Icon = ICONS[item.icon];
-  const count = PRODUCTS.filter((p) => p.category === item.title).length;
+  const count = ALL_PRODUCTS.filter((p) => p.category === item.title).length;
 
   return (
     <Reveal delay={delay}>

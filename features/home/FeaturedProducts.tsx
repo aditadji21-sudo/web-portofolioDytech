@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { PRODUCTS } from "@/lib/constants";
+import { ALL_PRODUCTS } from '@/lib/all-products';
 import { ProductCard } from "@/features/produk/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function FeaturedProducts() {
-  const featured = PRODUCTS.filter((p) => p.badge).concat(
-    PRODUCTS.filter((p) => !p.badge).slice(0, 6 - PRODUCTS.filter((p) => p.badge).length)
+  const featured = ALL_PRODUCTS.filter((p) => p.badge).concat(
+    ALL_PRODUCTS.filter((p) => !p.badge).slice(0, 6 - ALL_PRODUCTS.filter((p) => p.badge).length)
   );
 
   return (
