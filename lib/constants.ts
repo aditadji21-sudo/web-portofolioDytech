@@ -60,6 +60,10 @@ export type Product = {
   specs: string[];
   badge?: string;
   image?: string; // Tambahkan baris ini
+  images?: string[]; // opsional: galeri foto tambahan untuk halaman detail
+  description?: string; // opsional: paragraf deskripsi di halaman detail
+  stock?: string; // opsional: status stok, mis. "Ready Stock", "Indent 3-5 hari"
+  sku?: string; // opsional: kode SKU/produk
 };
 
 export type ProcessStep = {
