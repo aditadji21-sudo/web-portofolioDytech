@@ -2,13 +2,13 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { CATEGORIES } from "@/lib/constants";
-import { ALL_PRODUCTS } from "@/lib/all-products";
+import type { Product } from "@/lib/constants";
 import { ProductCard } from "@/features/produk/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 
 const FILTERS = ["Semua", ...CATEGORIES.map((c) => c.title)];
 
-export function ProductGrid() {
+export function ProductGrid({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -28,7 +28,7 @@ export function ProductGrid() {
       }
     };
 
-  const filtered = active === "Semua" ? ALL_PRODUCTS : ALL_PRODUCTS.filter((p) => p.category === active);
+  const filtered = active === "Semua" ? products : products.filter((p) => p.category === active);
 
   return (
     <section className="px-4 sm:px-6 md:px-8 py-10 md:py-12">

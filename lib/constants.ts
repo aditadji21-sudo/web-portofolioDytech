@@ -52,6 +52,19 @@ export const CATEGORIES: Category[] = [
   },
 ];
 
+export type Processor = {
+  name: string; // mis. "Intel Core i7-13650HX"
+  brand: "Intel" | "AMD";
+  generation: string; // mis. "13th Gen (Raptor Lake HX)"
+  cores: string; // mis. "14 (6P+8E)"
+  threads: string; // mis. "20"
+  baseClock: string; // mis. "2.6 GHz"
+  turboClock: string; // mis. "4.9 GHz"
+  cache: string; // mis. "24 MB"
+  tdp: string; // mis. "55W"
+  igpu: string; // mis. "Intel UHD Graphics"
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -64,6 +77,7 @@ export type Product = {
   description?: string; // opsional: paragraf deskripsi di halaman detail
   stock?: string; // opsional: status stok, mis. "Ready Stock", "Indent 3-5 hari"
   sku?: string; // opsional: kode SKU/produk
+  processor?: Processor; // opsional: data prosesor terstruktur untuk fitur bandingkan
 };
 
 export type ProcessStep = {

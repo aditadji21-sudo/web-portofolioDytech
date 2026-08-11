@@ -3,10 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, MessageCircle, Phone, ShieldCheck, Truck, Wrench } from "lucide-react";
+import { ChevronRight, MessageCircle, Phone, Scale, ShieldCheck, Truck, Wrench } from "lucide-react";
 import type { Product } from "@/lib/constants";
 import { CATEGORIES, STORE_INFO } from "@/lib/constants";
-import { ALL_PRODUCTS } from "@/lib/all-products";
 import { ProductCard } from "@/features/produk/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 import imgPc from "@/assets/product-pc.svg";
@@ -32,7 +31,7 @@ function fallbackDescription(product: Product) {
   return `${product.name} dari kategori ${product.category} ini dibekali ${specText}. Unit siap dipesan di DYTECH Computer, konsultasikan kebutuhan atau spesifikasi tambahan lewat WhatsApp sebelum melakukan pembelian.`;
 }
 
-export function ProductDetail({ product }: { product: Product }) {
+export function ProductDetail({ product, allProducts }: { product: Product; allProducts: Product[] }) {
   const accent = accentFor(product.category);
   const mainImage = product.image || CATEGORY_IMAGE[product.category] || imgPc;
   const gallery = product.images && product.images.length > 0 ? product.images : [mainImage as string];
@@ -41,7 +40,7 @@ export function ProductDetail({ product }: { product: Product }) {
   const waText = encodeURIComponent(`Halo DYTECH, saya mau tanya tentang ${product.name}.`);
   const waLink = `https://wa.me/${STORE_INFO.whatsapp}?text=${waText}`;
 
-  const related = ALL_PRODUCTS.filter(
+  const related = allProducts.filter(
     (p) => p.category === product.category && p.slug !== product.slug
   ).slice(0, 3);
 
@@ -181,6 +180,15 @@ export function ProductDetail({ product }: { product: Product }) {
                 ))}
               </ul>
             </div>
+
+            {product.processor && (
+              <Link
+                href={`/produk/bandingkan?a=${encodeURIComponent(product.slug)}`}
+                className="inline-flex items-center gap-2 font-body text-xs sm:text-sm font-semibold text-[#2F5CF0] border border-[#2F5CF0]/30 rounded-full px-4 py-2.5 mb-6 hover:bg-[#2F5CF0]/5 transition-colors"
+              >
+                <Scale size={14} /> Bandingkan Processor dengan Laptop Lain
+              </Link>
+            )}
 
             {/* SKU + category */}
             <div className="font-mono text-[11px] text-[#8890A6] space-y-1 pt-4 border-t border-[#EFF1F8]">

@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ALL_PRODUCTS } from "@/lib/all-products";
+import { getAllProducts } from "@/lib/getProducts";
 import { ProductDetail } from "@/features/produk/ProductDetail";
 
 type Params = { slug: string };
 
-function findProduct(slug: string) {
-  const decoded = decodeURIComponent(slug);
-  return ALL_PRODUCTS.find((p) => p.slug === decoded);
-}
-
 export async function generateStaticParams() {
-  return ALL_PRODUCTS.map((p) => ({ slug: p.slug }));
+  const products = await getAllProducts();
+  return products.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -20,7 +16,8 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = findProduct(slug);
+  const products = await getAllProducts();
+  const product = products.find((p) => p.slug === decodeURIComponent(slug));
   if (!product) return { title: "Produk tidak ditemukan — DYTECH Computer" };
 
   return {
@@ -35,9 +32,10 @@ export default async function ProductDetailPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const product = findProduct(slug);
+  const products = await getAllProducts();
+  const product = products.find((p) => p.slug === decodeURIComponent(slug));
 
   if (!product) notFound();
 
-  return <ProductDetail product={product} />;
+  return <ProductDetail product={product} allProducts={products} />;
 }

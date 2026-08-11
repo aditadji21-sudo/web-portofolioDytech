@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ALL_PRODUCTS } from '@/lib/all-products';
+import { getAllProducts } from "@/lib/getProducts";
 import { ProductCard } from "@/features/produk/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function FeaturedProducts() {
-  const featured = ALL_PRODUCTS.filter((p) => p.badge).concat(
-    ALL_PRODUCTS.filter((p) => !p.badge).slice(0, 6 - ALL_PRODUCTS.filter((p) => p.badge).length)
+export async function FeaturedProducts() {
+  const products = await getAllProducts();
+  const featured = products.filter((p) => p.badge).concat(
+    products.filter((p) => !p.badge).slice(0, 6 - products.filter((p) => p.badge).length)
   );
 
   return (
-    <section className="px-4 sm:px-6 md:px-8 py-16 md:py-20 bg-[#F9FAFD]">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative px-4 sm:px-6 md:px-8 py-16 md:py-20 overflow-hidden bg-[#FFF8E8]">
+      <div className="pointer-events-none absolute -bottom-20 left-1/3 w-72 h-72 rounded-full bg-[#F6C623]/20 blur-[100px]" />
+      <div className="max-w-6xl mx-auto relative">
         <Reveal className="flex items-end justify-between mb-10 md:mb-12 gap-4">
           <div>
             <span className="inline-block font-body text-xs font-bold tracking-wide text-white bg-[#F0323B] rounded-full px-3 py-1 mb-3">
