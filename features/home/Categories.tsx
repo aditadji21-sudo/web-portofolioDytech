@@ -33,8 +33,11 @@ function CategoryCircle({ item, delay }: { item: Category; delay: number }) {
 
 export function Categories() {
   return (
-    <section id="kategori" className="px-4 sm:px-6 md:px-8 py-16 md:py-20">
-      <div className="max-w-6xl mx-auto">
+    <section id="kategori" className="relative px-4 sm:px-6 md:px-8 py-14 md:py-20 overflow-hidden bg-[#F6F8FF]">
+      <div className="pointer-events-none absolute -top-10 -left-16 w-64 h-64 rounded-full bg-[#2F5CF0]/10 blur-[90px]" />
+      <div className="pointer-events-none absolute top-1/2 -right-16 w-56 h-56 rounded-full bg-[#F6C623]/15 blur-[90px]" />
+
+      <div className="max-w-6xl mx-auto relative">
         <Reveal className="flex items-end justify-between mb-10 md:mb-12">
           <div>
             <span className="inline-block font-body text-xs font-bold tracking-wide text-white bg-[#2F5CF0] rounded-full px-3 py-1 mb-3">

@@ -36,27 +36,27 @@ export function ProductCard({ product }: { product: Product }) {
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
         {product.badge && (
-          <span className="absolute top-3 left-3 font-body text-[11px] font-bold tracking-wide text-white bg-[#F0323B] rounded-full px-3 py-1 shadow-sm">
+          <span className="absolute top-2 left-2 sm:top-3 sm:left-3 font-body text-[9px] sm:text-[11px] font-bold tracking-wide text-white bg-[#F0323B] rounded-full px-2 sm:px-3 py-0.5 sm:py-1 shadow-sm">
             {product.badge}
           </span>
         )}
       </Link>
 
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-3 sm:p-5 flex flex-col flex-1">
         <span
-          className="self-start font-mono text-[10px] tracking-wide px-2.5 py-1 rounded-full mb-3"
+          className="self-start font-mono text-[9px] sm:text-[10px] tracking-wide px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full mb-2 sm:mb-3"
           style={{ color: accent, backgroundColor: `${accent}14` }}
         >
           {product.category.toUpperCase()}
         </span>
 
         <Link href={href}>
-          <h3 className="font-display font-semibold text-[15px] text-[#12162A] mb-2.5 leading-snug hover:text-[#2F5CF0] transition-colors">
+          <h3 className="font-display font-semibold text-[13px] sm:text-[15px] text-[#12162A] mb-1.5 sm:mb-2.5 leading-snug hover:text-[#2F5CF0] transition-colors line-clamp-2">
             {product.name}
           </h3>
         </Link>
 
-        <ul className="font-body text-[12px] text-[#667085] space-y-1 mb-4">
+        <ul className="hidden sm:block font-body text-[12px] text-[#667085] space-y-1 mb-4">
           {product.specs.slice(0, 3).map((s) => (
             <li key={s} className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-[#C6CADA]" />
@@ -65,20 +65,30 @@ export function ProductCard({ product }: { product: Product }) {
           ))}
         </ul>
 
-        <div className="mt-auto pt-4 border-t border-[#EFF1F8]">
-          <span className="font-display font-bold text-[#12162A] text-[15px] block mb-3">{product.price}</span>
-          <div className="flex items-center gap-2">
+        <ul className="sm:hidden font-body text-[11px] text-[#667085] space-y-0.5 mb-3">
+          {product.specs.slice(0, 2).map((s) => (
+            <li key={s} className="truncate">
+              {s}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-auto pt-3 sm:pt-4 border-t border-[#EFF1F8]">
+          <span className="font-display font-bold text-[#12162A] text-[13px] sm:text-[15px] block mb-2 sm:mb-3">
+            {product.price}
+          </span>
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <Link
               href={href}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 font-body text-xs font-semibold text-[#12162A] bg-[#F3F5FB] rounded-full px-3.5 py-2 hover:bg-[#E7EAF6] transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 font-body text-[10px] sm:text-xs font-semibold text-[#12162A] bg-[#F3F5FB] rounded-full px-2 sm:px-3.5 py-1.5 sm:py-2 hover:bg-[#E7EAF6] transition-colors"
             >
-              Detail <ArrowRight size={13} />
+              Detail <ArrowRight size={11} className="hidden sm:inline" />
             </Link>
             <Link
               href="/kontak"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 font-body text-xs font-semibold text-white bg-[#2F5CF0] rounded-full px-3.5 py-2 hover:bg-[#16266B] transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-1 sm:gap-1.5 font-body text-[10px] sm:text-xs font-semibold text-white bg-[#2F5CF0] rounded-full px-2 sm:px-3.5 py-1.5 sm:py-2 hover:bg-[#16266B] transition-colors"
             >
-              <MessageCircle size={13} /> Tanya
+              <MessageCircle size={11} /> Tanya
             </Link>
           </div>
         </div>

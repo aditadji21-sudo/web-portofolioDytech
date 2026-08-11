@@ -83,6 +83,24 @@ export function Nav() {
               {l.label}
             </Link>
           ))}
+
+          <div className="pt-1 border-t border-black/5">
+            <p className="font-mono text-[10px] tracking-wide text-[#8890A6] mb-2.5 mt-3">KATEGORI</p>
+            <div className="flex flex-col gap-3">
+              {CATEGORIES.map((c) => (
+                <Link
+                  key={c.title}
+                  href={`/produk?kategori=${encodeURIComponent(c.title)}`}
+                  className="inline-flex items-center gap-2.5 hover:text-[#2F5CF0]"
+                  onClick={() => setOpen(false)}
+                >
+                  <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: c.accent }} />
+                  {c.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <a
             href="https://wa.me/62881026014897"
             target="_blank"

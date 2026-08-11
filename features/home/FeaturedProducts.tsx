@@ -10,7 +10,7 @@ export function FeaturedProducts() {
   );
 
   return (
-    <section className="px-4 sm:px-6 md:px-8 py-16 md:py-20 bg-white">
+    <section className="px-4 sm:px-6 md:px-8 py-16 md:py-20 bg-[#F9FAFD]">
       <div className="max-w-6xl mx-auto">
         <Reveal className="flex items-end justify-between mb-10 md:mb-12 gap-4">
           <div>
