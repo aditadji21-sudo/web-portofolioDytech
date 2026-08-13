@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { TopBar } from "@/components/TopBar";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { getAllProducts } from "@/lib/getProducts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,12 +11,17 @@ export const metadata: Metadata = {
     "DYTECH Computer merakit PC, menjual laptop & aksesoris, dan menangani servis dengan komponen bergaransi di Malang.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Diambil sekali di server (revalidate 60 detik lewat getAllProducts) lalu
+  // dikirim ke Nav supaya search bar bisa kasih rekomendasi produk real-time
+  // tanpa Nav sendiri harus jadi server component.
+  const products = await getAllProducts();
+
   return (
     <html lang="id">
       <body className="min-h-screen bg-[#F3F5FB] selection:bg-[#F6C623] selection:text-[#12162A] antialiased">
         <TopBar />
-        <Nav />
+        <Nav products={products} />
         <main>{children}</main>
         <Footer />
       </body>
