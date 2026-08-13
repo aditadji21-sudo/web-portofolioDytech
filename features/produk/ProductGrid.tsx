@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, SearchX, X } from "lucide-react";
 import { CATEGORIES } from "@/lib/constants";
 import type { Product } from "@/lib/constants";
 import { ProductCard } from "@/features/produk/ProductCard";
@@ -20,19 +20,22 @@ export function ProductGrid({ products }: { products: Product[] }) {
   // 2. Tentukan kategori aktif. Jika URL kosong atau tidak valid, kembali ke "Semua"
   const active = (kategoriUrl && FILTERS.includes(kategoriUrl)) ? kategoriUrl : "Semua";
 
-  // 3. Halaman aktif dari URL, default 1
+  // 3. Kata kunci pencarian dari URL (diisi lewat search bar di Nav)
+  const searchQuery = (searchParams.get("cari") ?? "").trim();
+
+  // 4. Halaman aktif dari URL, default 1
   const pageUrl = parseInt(searchParams.get("page") ?? "1", 10);
   const page = Number.isFinite(pageUrl) && pageUrl > 0 ? pageUrl : 1;
 
-  // 4. Fungsi ini akan mengubah URL saat tombol filter biru diklik — kategori baru = balik ke halaman 1
+  // 5. Ganti kategori: reset ke halaman 1, TAPI kata kunci pencarian yang aktif tetap dipertahankan
   const handleCategoryClick = (f: string) => {
-      if (f === "Semua") {
-        router.push("/produk", { scroll: false });
-      } else {
-        // Kita bungkus f dengan encodeURIComponent agar simbol & aman dibaca URL
-        router.push(`/produk?kategori=${encodeURIComponent(f)}`, { scroll: false });
-      }
-    };
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
+    if (f === "Semua") params.delete("kategori");
+    else params.set("kategori", f);
+    const qs = params.toString();
+    router.push(qs ? `/produk?${qs}` : "/produk", { scroll: false });
+  };
 
   const goToPage = (p: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -42,7 +45,25 @@ export function ProductGrid({ products }: { products: Product[] }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const filtered = active === "Semua" ? products : products.filter((p) => p.category === active);
+  const clearSearch = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("cari");
+    params.delete("page");
+    const qs = params.toString();
+    router.push(qs ? `/produk?${qs}` : "/produk", { scroll: false });
+  };
+
+  let filtered = active === "Semua" ? products : products.filter((p) => p.category === active);
+
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    filtered = filtered.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.specs.some((s) => s.toLowerCase().includes(q))
+    );
+  }
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const safePage = Math.min(page, totalPages);
@@ -51,6 +72,21 @@ export function ProductGrid({ products }: { products: Product[] }) {
   return (
     <section className="px-4 sm:px-6 md:px-8 py-10 md:py-12">
       <div className="max-w-6xl mx-auto">
+        {searchQuery && (
+          <Reveal className="flex items-center gap-2 mb-6 font-body text-sm text-[#667085]">
+            <span>
+              Hasil pencarian untuk <span className="font-semibold text-[#12162A]">&quot;{searchQuery}&quot;</span>{" "}
+              ({filtered.length} produk)
+            </span>
+            <button
+              onClick={clearSearch}
+              className="inline-flex items-center gap-1 text-[#2F5CF0] hover:text-[#16266B] font-medium"
+            >
+              <X size={13} /> Hapus
+            </button>
+          </Reveal>
+        )}
+
         <Reveal className="flex flex-wrap gap-2.5 mb-8">
           {FILTERS.map((f) => {
             const isActive = f === active;
@@ -79,9 +115,14 @@ export function ProductGrid({ products }: { products: Product[] }) {
         </div>
 
         {filtered.length === 0 && (
-          <p className="font-body text-sm text-[#8890A6] text-center py-16">
-            Belum ada produk di kategori ini.
-          </p>
+          <div className="text-center py-16">
+            <SearchX size={28} className="mx-auto text-[#C6CADA] mb-3" />
+            <p className="font-body text-sm text-[#8890A6]">
+              {searchQuery
+                ? `Tidak ada produk yang cocok dengan "${searchQuery}".`
+                : "Belum ada produk di kategori ini."}
+            </p>
+          </div>
         )}
 
         {filtered.length > 0 && totalPages > 1 && (

@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { Cpu, Laptop2, MousePointerClick, Wrench } from "lucide-react";
 import { CATEGORIES, type Category } from '@/lib/constants';
-import { ALL_PRODUCTS } from '@/lib/all-products';
+import { getAllProducts } from '@/lib/getProducts';
 import { Reveal } from "@/components/ui/Reveal";
 
 const ICONS = { cpu: Cpu, laptop: Laptop2, mouse: MousePointerClick, wrench: Wrench };
 
-function CategoryCircle({ item, delay }: { item: Category; delay: number }) {
+function CategoryCircle({ item, count, delay }: { item: Category; count: number; delay: number }) {
   const Icon = ICONS[item.icon];
-  const count = ALL_PRODUCTS.filter((p) => p.category === item.title).length;
 
   return (
     <Reveal delay={delay}>
@@ -31,11 +30,13 @@ function CategoryCircle({ item, delay }: { item: Category; delay: number }) {
   );
 }
 
-export function Categories() {
+export async function Categories() {
+  const products = await getAllProducts();
+
   return (
-    <section id="kategori" className="relative px-4 sm:px-6 md:px-8 py-14 md:py-20 overflow-hidden bg-[#F6F8FF]">
-      <div className="pointer-events-none absolute -top-10 -left-16 w-64 h-64 rounded-full bg-[#2F5CF0]/10 blur-[90px]" />
-      <div className="pointer-events-none absolute top-1/2 -right-16 w-56 h-56 rounded-full bg-[#F6C623]/15 blur-[90px]" />
+    <section id="kategori" className="relative px-4 sm:px-6 md:px-8 py-14 md:py-20 overflow-hidden bg-[#EAF0FF]">
+      <div className="pointer-events-none absolute -top-10 -left-16 w-64 h-64 rounded-full bg-[#2F5CF0]/20 blur-[80px]" />
+      <div className="pointer-events-none absolute top-1/2 -right-16 w-56 h-56 rounded-full bg-[#F6C623]/25 blur-[80px]" />
 
       <div className="max-w-6xl mx-auto relative">
         <Reveal className="flex items-end justify-between mb-10 md:mb-12">
@@ -50,9 +51,10 @@ export function Categories() {
         </Reveal>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-4">
-          {CATEGORIES.map((c, i) => (
-            <CategoryCircle key={c.title} item={c} delay={i * 90} />
-          ))}
+          {CATEGORIES.map((c, i) => {
+            const count = products.filter((p) => p.category === c.title).length;
+            return <CategoryCircle key={c.title} item={c} count={count} delay={i * 90} />;
+          })}
         </div>
       </div>
     </section>
