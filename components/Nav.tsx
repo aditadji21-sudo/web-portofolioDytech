@@ -1,93 +1,166 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, Menu, X, MessageCircle } from "lucide-react";
-import { NAV_LINKS, CATEGORIES, type Product } from "@/lib/constants";
+import { Search, Menu, X, MessageCircle, ChevronDown } from "lucide-react";
+import { NAV_LINKS, CATEGORIES } from "@/lib/constants";
+import type { Product } from "@/lib/constants";
 import { Logo } from "@/components/Logo";
-import imgPc from "@/assets/product-pc.svg";
-import imgLaptop from "@/assets/LAPTOP LOQ 15ARP10E.svg";
-import imgAksesoris from "@/assets/product-aksesoris.svg";
-import imgServis from "@/assets/product-servis.svg";
 
-const CATEGORY_IMAGE: Record<string, typeof imgPc> = {
-  "PC Rakitan": imgPc,
-  Laptop: imgLaptop,
-  Aksesoris: imgAksesoris,
-  "Servis & Upgrade": imgServis,
-};
-
-const MAX_SUGGESTIONS = 6;
-
-// Cari produk yang cocok di nama, kategori, atau spesifikasinya — dipakai
-// bareng oleh dropdown desktop & mobile.
-function searchProducts(products: Product[], query: string): Product[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return [];
-
-  return products
-    .filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q) ||
-        p.specs.some((s) => s.toLowerCase().includes(q))
-    )
-    .slice(0, MAX_SUGGESTIONS);
-}
-
-function SuggestionItem({ product, onSelect }: { product: Product; onSelect: () => void }) {
-  const image = product.image || CATEGORY_IMAGE[product.category] || imgPc;
-
-  return (
-    <Link
-      href={`/produk/${encodeURIComponent(product.slug)}`}
-      onClick={onSelect}
-      className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#F3F5FB] transition-colors"
-    >
-      <div className="relative w-11 h-11 shrink-0 rounded-lg overflow-hidden bg-[#F3F5FB]">
-        <Image src={image} alt={product.name} fill className="object-cover" />
-      </div>
-      <div className="min-w-0">
-        <p className="font-body text-[13px] text-[#12162A] leading-snug line-clamp-1">{product.name}</p>
-        <p className="font-mono text-[11px] text-[#8890A6]">{product.price}</p>
-      </div>
-    </Link>
-  );
-}
-
-function SuggestionDropdown({
-  query,
-  results,
-  onSelect,
-  onSeeAll,
+function SearchBox({
+  products,
+  placeholder,
+  compact = false,
+  onNavigate,
 }: {
-  query: string;
-  results: Product[];
-  onSelect: () => void;
-  onSeeAll: () => void;
+  products: Product[];
+  placeholder: string;
+  compact?: boolean;
+  onNavigate?: () => void;
 }) {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("");
+  const [focused, setFocused] = useState(false);
+  const router = useRouter();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Klik di luar box search -> tutup dropdown saran
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setFocused(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const matches = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    const pool = category ? products.filter((p) => p.category === category) : products;
+    return pool.filter((p) => p.name.toLowerCase().includes(q)).slice(0, 5);
+  }, [query, products, category]);
+
+  const showDropdown = focused && query.trim().length > 0;
+
+  const goToSearchResults = (q: string) => {
+    const trimmed = q.trim();
+    const params = new URLSearchParams();
+    if (trimmed) params.set("cari", trimmed);
+    if (category) params.set("kategori", category);
+    const qs = params.toString();
+    router.push(qs ? `/produk?${qs}` : "/produk");
+    setFocused(false);
+    onNavigate?.();
+  };
+
+  const goToProduct = (slug: string) => {
+    router.push(`/produk/${encodeURIComponent(slug)}`);
+    setFocused(false);
+    setQuery("");
+    onNavigate?.();
+  };
+
   return (
-    <div className="absolute left-0 right-0 top-[calc(100%+8px)] bg-white rounded-2xl border border-[#EAECF5] shadow-[0_16px_40px_rgba(18,22,42,0.14)] overflow-hidden z-50">
-      {results.length > 0 ? (
-        <>
-          <div className="py-1.5">
-            {results.map((p) => (
-              <SuggestionItem key={p.slug} product={p} onSelect={onSelect} />
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={onSeeAll}
-            className="w-full text-left px-4 py-3 border-t border-[#EFF1F8] font-body text-[13px] font-semibold text-[#2F5CF0] hover:bg-[#F3F5FB] transition-colors"
+    <div ref={wrapperRef} className="relative w-full">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          goToSearchResults(query);
+        }}
+        className={
+          compact
+            ? "flex items-center bg-[#F3F5FB] rounded-full"
+            : "w-full flex items-center bg-[#F3F5FB] rounded-full border border-transparent focus-within:border-[#2F5CF0]/40 focus-within:bg-white transition-colors"
+        }
+      >
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onFocus={() => setFocused(true)}
+          placeholder={placeholder}
+          autoComplete="off"
+          className={
+            compact
+              ? "w-full bg-transparent px-4 py-2.5 text-sm placeholder:text-[#8890A6] focus:outline-none"
+              : "w-full bg-transparent px-5 py-2.5 font-body text-sm text-[#12162A] placeholder:text-[#8890A6] focus:outline-none"
+          }
+        />
+
+        <div className="relative shrink-0 border-l border-[#E1E4EF]">
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            aria-label="Pilih kategori"
+            className={
+              compact
+                ? "appearance-none bg-transparent pl-3 pr-6 py-2.5 font-body text-xs text-[#667085] focus:outline-none cursor-pointer max-w-[92px]"
+                : "appearance-none bg-transparent pl-4 pr-7 py-2.5 font-body text-xs text-[#667085] focus:outline-none cursor-pointer max-w-[130px]"
+            }
           >
-            Lihat semua hasil untuk &quot;{query}&quot;
-          </button>
-        </>
-      ) : (
-        <div className="px-4 py-6 text-center font-body text-[13px] text-[#8890A6]">
-          Tidak ada produk yang cocok dengan &quot;{query}&quot;
+            <option value="">Semua Kategori</option>
+            {CATEGORIES.map((c) => (
+              <option key={c.title} value={c.title}>
+                {c.title}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            size={12}
+            className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[#8890A6]"
+          />
+        </div>
+
+        <button
+          type="submit"
+          aria-label="Cari"
+          className={
+            compact
+              ? "mr-4 text-[#8890A6]"
+              : "mr-1.5 w-9 h-9 shrink-0 rounded-full bg-[#2F5CF0] text-white flex items-center justify-center hover:bg-[#16266B] transition-colors"
+          }
+        >
+          <Search size={16} />
+        </button>
+      </form>
+
+      {showDropdown && (
+        <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-[#EAECF5] rounded-2xl shadow-[0_12px_32px_rgba(18,22,42,0.14)] overflow-hidden z-50">
+          {matches.length > 0 ? (
+            <>
+              {matches.map((p) => (
+                <button
+                  key={p.slug}
+                  type="button"
+                  onClick={() => goToProduct(p.slug)}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-[#F3F5FB] transition-colors text-left"
+                >
+                  <div className="relative w-10 h-10 shrink-0 rounded-lg bg-[#F3F5FB] overflow-hidden">
+                    {p.image && (
+                      <Image src={p.image} alt={p.name} fill sizes="40px" className="object-cover" />
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-body text-sm text-[#12162A] truncate">{p.name}</p>
+                    <p className="font-body text-xs text-[#8890A6]">{p.price}</p>
+                  </div>
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={() => goToSearchResults(query)}
+                className="w-full text-left px-4 py-2.5 font-body text-xs font-semibold text-[#2F5CF0] hover:bg-[#F3F5FB] border-t border-[#EFF1F8] transition-colors"
+              >
+                Lihat semua hasil untuk &quot;{query}&quot;
+              </button>
+            </>
+          ) : (
+            <p className="px-4 py-3 font-body text-sm text-[#8890A6]">Tidak ada produk yang cocok.</p>
+          )}
         </div>
       )}
     </div>
@@ -96,38 +169,6 @@ function SuggestionDropdown({
 
 export function Nav({ products }: { products: Product[] }) {
   const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const [mobileQuery, setMobileQuery] = useState("");
-  const [showSuggest, setShowSuggest] = useState(false);
-  const [showMobileSuggest, setShowMobileSuggest] = useState(false);
-  const router = useRouter();
-  const desktopFormRef = useRef<HTMLFormElement>(null);
-  const mobileFormRef = useRef<HTMLFormElement>(null);
-
-  const results = useMemo(() => searchProducts(products, query), [products, query]);
-  const mobileResults = useMemo(() => searchProducts(products, mobileQuery), [products, mobileQuery]);
-
-  // Tutup dropdown kalau klik di luar search bar.
-  useEffect(() => {
-    function onClickOutside(e: MouseEvent) {
-      if (desktopFormRef.current && !desktopFormRef.current.contains(e.target as Node)) {
-        setShowSuggest(false);
-      }
-      if (mobileFormRef.current && !mobileFormRef.current.contains(e.target as Node)) {
-        setShowMobileSuggest(false);
-      }
-    }
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, []);
-
-  const runSearch = (q: string) => {
-    const trimmed = q.trim();
-    router.push(trimmed ? `/produk?cari=${encodeURIComponent(trimmed)}` : "/produk");
-    setOpen(false);
-    setShowSuggest(false);
-    setShowMobileSuggest(false);
-  };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(18,22,42,0.06)]">
@@ -137,45 +178,9 @@ export function Nav({ products }: { products: Product[] }) {
           <Logo />
         </Link>
 
-        <form
-          ref={desktopFormRef}
-          onSubmit={(e) => {
-            e.preventDefault();
-            runSearch(query);
-          }}
-          className="hidden md:flex flex-1 items-center relative"
-        >
-          <div className="w-full flex items-center bg-[#F3F5FB] rounded-full border border-transparent focus-within:border-[#2F5CF0]/40 focus-within:bg-white transition-colors">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setShowSuggest(true);
-              }}
-              onFocus={() => setShowSuggest(true)}
-              placeholder="Cari PC rakitan, laptop, aksesoris..."
-              className="w-full bg-transparent px-5 py-2.5 font-body text-sm text-[#12162A] placeholder:text-[#8890A6] focus:outline-none"
-              autoComplete="off"
-            />
-            <button
-              type="submit"
-              aria-label="Cari"
-              className="mr-1.5 w-9 h-9 shrink-0 rounded-full bg-[#2F5CF0] text-white flex items-center justify-center hover:bg-[#16266B] transition-colors"
-            >
-              <Search size={16} />
-            </button>
-          </div>
-
-          {showSuggest && query.trim() && (
-            <SuggestionDropdown
-              query={query}
-              results={results}
-              onSelect={() => setShowSuggest(false)}
-              onSeeAll={() => runSearch(query)}
-            />
-          )}
-        </form>
+        <div className="hidden md:flex flex-1 items-center">
+          <SearchBox products={products} placeholder="Cari PC rakitan, laptop, aksesoris..." />
+        </div>
 
         <a
           href="https://wa.me/62881026014897"
@@ -214,44 +219,13 @@ export function Nav({ products }: { products: Product[] }) {
 
       {open && (
         <div className="md:hidden border-t border-black/5 bg-white px-6 py-4 flex flex-col gap-4 font-body text-sm text-[#12162A]">
-          <form
-            ref={mobileFormRef}
-            onSubmit={(e) => {
-              e.preventDefault();
-              runSearch(mobileQuery);
-            }}
-            className="relative"
-          >
-            <div className="flex items-center bg-[#F3F5FB] rounded-full">
-              <input
-                type="text"
-                value={mobileQuery}
-                onChange={(e) => {
-                  setMobileQuery(e.target.value);
-                  setShowMobileSuggest(true);
-                }}
-                onFocus={() => setShowMobileSuggest(true)}
-                placeholder="Cari produk..."
-                className="w-full bg-transparent px-4 py-2.5 text-sm placeholder:text-[#8890A6] focus:outline-none"
-                autoComplete="off"
-              />
-              <button type="submit" aria-label="Cari" className="mr-4 text-[#8890A6]">
-                <Search size={16} />
-              </button>
-            </div>
+          <SearchBox
+            products={products}
+            placeholder="Cari produk..."
+            compact
+            onNavigate={() => setOpen(false)}
+          />
 
-            {showMobileSuggest && mobileQuery.trim() && (
-              <SuggestionDropdown
-                query={mobileQuery}
-                results={mobileResults}
-                onSelect={() => {
-                  setShowMobileSuggest(false);
-                  setOpen(false);
-                }}
-                onSeeAll={() => runSearch(mobileQuery)}
-              />
-            )}
-          </form>
           {NAV_LINKS.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-[#2F5CF0]" onClick={() => setOpen(false)}>
               {l.label}

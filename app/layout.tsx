@@ -12,9 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Diambil sekali di server (revalidate 60 detik lewat getAllProducts) lalu
-  // dikirim ke Nav supaya search bar bisa kasih rekomendasi produk real-time
-  // tanpa Nav sendiri harus jadi server component.
   const products = await getAllProducts();
 
   return (
