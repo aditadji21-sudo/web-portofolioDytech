@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Truck, BadgePercent } from "lucide-react";
+import { ArrowRight, ShieldCheck, Truck, MessageCircle } from "lucide-react";
 import heroBanner from "@/assets/Dytech-Banner.svg";
 import { Reveal } from "@/components/ui/Reveal";
 
 const BADGES = [
   { icon: Truck, label: "Gratis Ongkir", sub: "Area Malang Kota", color: "#2F5CF0" },
   { icon: ShieldCheck, label: "Garansi Resmi", sub: "Komponen bergaransi", color: "#F0323B" },
-  { icon: BadgePercent, label: "Cicilan 0%", sub: "Tenor s.d. 12 bulan", color: "#E8A800" },
+  { icon: MessageCircle, label: "Konsultasi Gratis", sub: "Tanya dulu sebelum beli", color: "#E8A800" },
 ];
 
 export function Hero() {

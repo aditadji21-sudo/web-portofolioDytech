@@ -22,7 +22,7 @@ export type Category = {
   title: string;
   desc: string;
   accent: string;
-  icon: "cpu" | "laptop" | "mouse" | "wrench" | "printer";
+  icon: "cpu" | "laptop" | "mouse" | "wrench" | "printer" | "speaker";
 };
 
 export const CATEGORIES: Category[] = [
@@ -55,6 +55,12 @@ export const CATEGORIES: Category[] = [
     desc: "Printer inkjet, laser, hingga all-in-one untuk kebutuhan rumah dan kantor.",
     accent: BRAND.red,
     icon: "printer",
+  },
+  {
+    title: "Speaker",
+    desc: "Speaker aktif, bluetooth, hingga soundbar untuk kebutuhan hiburan dan kerja.",
+    accent: BRAND.yellow,
+    icon: "speaker",
   },
 ];
 
