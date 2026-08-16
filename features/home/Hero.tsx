@@ -42,7 +42,7 @@ export function Hero() {
               </h1>
 
               <p className="font-body text-[#C7CCE2] text-sm md:text-base mt-4 sm:mt-5 max-w-md leading-relaxed">
-                Custom build, laptop, aksesoris, dan servis dengan komponen bergaransi — estimasi biaya
+                Custom build, laptop, aksesoris, dan servis dengan komponen bergaransi. estimasi biaya
                 disampaikan di awal, sebelum unit disentuh teknisi.
               </p>
 

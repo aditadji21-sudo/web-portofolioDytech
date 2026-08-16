@@ -20,7 +20,7 @@ export function Footer() {
               />
         </div>
           <p className="font-body text-sm leading-relaxed text-[#8A92B5]">
-            Toko &amp; servis komputer di Malang — rakitan PC, laptop, aksesoris, dan servis dengan komponen
+            Toko &amp; servis komputer di Malang. Rakitan PC, laptop, aksesoris, dan servis dengan komponen
             bergaransi.
           </p>
         </div>
