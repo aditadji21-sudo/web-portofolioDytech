@@ -22,7 +22,7 @@ export type Category = {
   title: string;
   desc: string;
   accent: string;
-  icon: "cpu" | "laptop" | "mouse" | "wrench" | "printer" | "speaker";
+  icon: "cpu" | "laptop" | "mouse" | "wrench" | "printer" | "speaker" | "ssd" | "cctv" | "aio";
 };
 
 export const CATEGORIES: Category[] = [
@@ -61,6 +61,24 @@ export const CATEGORIES: Category[] = [
     desc: "Speaker aktif, bluetooth, hingga soundbar untuk kebutuhan hiburan dan kerja.",
     accent: BRAND.yellow,
     icon: "speaker",
+  },
+  {
+    title: "SSD",
+    desc: "SSD SATA & NVMe berbagai kapasitas untuk upgrade kecepatan PC atau laptop.",
+    accent: BRAND.blue,
+    icon: "ssd",
+  },
+  {
+    title: "CCTV",
+    desc: "Kamera pengawas indoor & outdoor, lengkap dengan pemasangan dan setting.",
+    accent: BRAND.yellow,
+    icon: "cctv",
+  },
+  {
+    title: "AIO",
+    desc: "PC All-in-One hemat tempat, siap pakai untuk rumah maupun kantor.",
+    accent: BRAND.red,
+    icon: "aio",
   },
 ];
 

@@ -1,10 +1,20 @@
 import Link from "next/link";
-import { Cpu, Laptop2, MousePointerClick, Wrench, Printer, Speaker } from "lucide-react";
+import { Cpu, Laptop2, MousePointerClick, Wrench, Printer, Speaker, HardDrive, Camera, Monitor } from "lucide-react";
 import { CATEGORIES, type Category } from '@/lib/constants';
 import { getAllProducts } from '@/lib/getProducts';
 import { Reveal } from "@/components/ui/Reveal";
 
-const ICONS = { cpu: Cpu, laptop: Laptop2, mouse: MousePointerClick, wrench: Wrench, printer: Printer, speaker: Speaker };
+const ICONS = {
+  cpu: Cpu,
+  laptop: Laptop2,
+  mouse: MousePointerClick,
+  wrench: Wrench,
+  printer: Printer,
+  speaker: Speaker,
+  ssd: HardDrive,
+  cctv: Camera,
+  aio: Monitor,
+};
 
 function CategoryCircle({ item, count, delay }: { item: Category; count: number; delay: number }) {
   const Icon = ICONS[item.icon];
@@ -50,7 +60,7 @@ export async function Categories() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-y-8 gap-x-4">
+        <div className="grid grid-cols-3 gap-y-10 gap-x-4 sm:gap-x-6 max-w-3xl mx-auto">
           {CATEGORIES.map((c, i) => {
             const count = products.filter((p) => p.category === c.title).length;
             return <CategoryCircle key={c.title} item={c} count={count} delay={i * 90} />;
