@@ -1,87 +1,121 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Truck, MessageCircle } from "lucide-react";
-import heroBanner from "@/assets/Dytech-Banner.svg";
 import { Reveal } from "@/components/ui/Reveal";
+import { STORE_INFO } from "@/lib/constants";
+import { HeroCarousel } from "@/features/home/HeroCarousel";
 
 const BADGES = [
   { icon: Truck, label: "Gratis Ongkir", sub: "Area Malang Kota", color: "#2F5CF0" },
-  { icon: ShieldCheck, label: "Garansi Resmi", sub: "Komponen bergaransi", color: "#F0323B" },
-  { icon: MessageCircle, label: "Konsultasi Gratis", sub: "Tanya dulu sebelum beli", color: "#E8A800" },
+  { icon: ShieldCheck, label: "Garansi Resmi", sub: "100% Komponen Original", color: "#F0323B" },
+  { icon: MessageCircle, label: "Konsultasi Gratis", sub: "Tanya spek sesuai budget", color: "#F6C623" },
 ];
 
 export function Hero() {
+  const waUrl = `https://wa.me/${STORE_INFO.whatsapp}?text=${encodeURIComponent(
+    "Halo DYTECH Computer, saya ingin konsultasi rakit PC / cari laptop / tanya servis."
+  )}`;
+
   return (
-    <section className="sm:px-6 md:px-8 sm:pt-6 md:pt-8">
-      <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <div className="relative overflow-hidden bg-[#06070B] min-h-[420px] sm:min-h-[440px] md:min-h-[500px] rounded-none sm:rounded-2xl md:rounded-3xl">
-            <Image
-              src={heroBanner}
-              alt="Promo rakitan PC dan laptop DYTECH Computer"
-              fill
-              className="object-cover opacity-90"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#06070B] via-[#06070B]/75 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#06070B] to-transparent sm:hidden" />
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-white via-[#F3F5FB] to-[#E8ECF8]">
+      {/* Soft ambient blobs — using DESIGN.md primary-fixed-dim (#b4c5ff) tones */}
+      <div className="pointer-events-none absolute -top-32 -left-24 w-[500px] h-[500px] rounded-full bg-[#DBE1FF]/40 blur-[120px]" />
+      <div className="pointer-events-none absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-[#FFE083]/20 blur-[100px]" />
+      <div className="pointer-events-none absolute bottom-0 left-1/3 w-[350px] h-[350px] rounded-full bg-[#B4C5FF]/25 blur-[100px]" />
 
-            <div className="relative px-6 py-10 sm:px-7 sm:py-12 md:px-14 md:py-20 max-w-xl">
-              <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] text-[#F6C623] border border-[#F6C623]/30 rounded-full px-3 py-1.5 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F6C623] animate-pulse-soft" />
-                TOKO &amp; SERVIS KOMPUTER — MALANG
-              </span>
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pt-10 sm:pt-14 md:pt-16 pb-10 sm:pb-14 md:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          
+          {/* Left Column: Heading, Value Prop, CTA */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <Reveal>
+              <div className="inline-flex items-center gap-2 font-montserrat text-[11px] font-semibold tracking-[0.12em] text-[#2F5CF0] bg-[#DBE1FF]/50 rounded-full px-3.5 py-1.5 mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2F5CF0]" />
+                TOKO & SERVIS KOMPUTER — MALANG
+              </div>
+            </Reveal>
 
-              <h1 className="font-display font-semibold text-[30px] leading-[1.14] sm:text-[40px] md:text-[52px] text-white tracking-tight">
+            <Reveal delay={60}>
+              <h1 className="font-montserrat font-bold text-[32px] leading-[1.14] sm:text-[42px] md:text-[50px] text-[#12162A] tracking-tight">
                 Rakit PC impianmu,
                 <br />
                 harga jujur, servis{" "}
-                <span className="bg-gradient-to-r from-[#F6C623] via-[#8AA3FF] to-[#F0323B] bg-clip-text text-transparent">
+                <span className="text-[#2F5CF0]">
                   transparan.
                 </span>
               </h1>
+            </Reveal>
 
-              <p className="font-body text-[#C7CCE2] text-sm md:text-base mt-4 sm:mt-5 max-w-md leading-relaxed">
-                Custom build, laptop, aksesoris, dan servis dengan komponen bergaransi. estimasi biaya
-                disampaikan di awal, sebelum unit disentuh teknisi.
+            <Reveal delay={120}>
+              <p className="font-body text-[#667085] text-sm sm:text-base md:text-[17px] mt-4 sm:mt-5 max-w-xl leading-relaxed">
+                Custom build PC gaming &amp; workstation, laptop baru bergaransi resmi, aksesoris setup, serta servis teknisi terpercaya di Malang. Estimasi biaya disampaikan jelas di awal sebelum pengerjaan.
               </p>
+            </Reveal>
 
-              <div className="flex flex-wrap items-center gap-3 mt-7 sm:mt-8">
+            <Reveal delay={180}>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-7 sm:mt-8">
                 <Link
                   href="/produk"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#F6C623] text-[#12162A] font-body font-semibold text-sm hover:bg-white transition-colors duration-200"
+                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-[#2F5CF0] text-white font-montserrat font-semibold text-sm hover:bg-[#244bd6] transition-colors"
                 >
-                  Lihat Katalog <ArrowRight size={15} />
+                  Lihat Katalog <ArrowRight size={16} />
                 </Link>
-                <Link
-                  href="/kontak"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/25 text-white font-body font-medium text-sm hover:bg-white/10 transition-colors duration-200"
+                <a
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-white text-[#12162A] font-montserrat font-medium text-sm border border-[#E2E8F0] hover:border-[#B4C5FF] hover:bg-[#F3F5FB] transition-colors"
                 >
-                  Konsultasi Gratis
-                </Link>
+                  <MessageCircle size={16} className="text-[#2F5CF0]" /> Konsultasi Gratis
+                </a>
               </div>
-            </div>
-          </div>
-        </Reveal>
+            </Reveal>
 
-        <Reveal delay={120}>
-          <div className="relative z-10 -mt-6 sm:mt-4 px-4 sm:px-0 grid grid-cols-3 gap-2 sm:gap-4">
+            {/* Quick Trust Highlights under CTA */}
+            <Reveal delay={220}>
+              <div className="flex items-center gap-4 sm:gap-6 mt-8 pt-6 border-t border-[#E2E8F0] text-xs text-[#8890A6] font-body">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#17C964]" />
+                  <span>Teknisi Berpengalaman</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2F5CF0]" />
+                  <span>Garansi Resmi &amp; Toko</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F6C623]" />
+                  <span>Bisa COD Malang Kota</span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right Column: Instagram Portrait Carousel */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <Reveal delay={150} className="w-full max-w-[440px]">
+              <HeroCarousel />
+            </Reveal>
+          </div>
+
+        </div>
+
+        {/* Feature Badges */}
+        <Reveal delay={260}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-12 sm:mt-14 pt-8 border-t border-[#E2E8F0]">
             {BADGES.map((b) => (
               <div
                 key={b.label}
-                className="flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl px-2.5 sm:px-5 py-3 sm:py-4 shadow-[0_6px_20px_rgba(18,22,42,0.12)] sm:shadow-[0_1px_2px_rgba(18,22,42,0.06)] border-l-4 bg-white"
-                style={{ borderColor: b.color }}
+                className="flex items-center gap-3.5 rounded-xl px-4 sm:px-5 py-4 bg-white/70 border border-[#E2E8F0] hover:bg-white transition-colors"
               >
                 <div
-                  className="w-7 h-7 sm:w-10 sm:h-10 shrink-0 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: `${b.color}16` }}
+                  className="w-10 h-10 shrink-0 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${b.color}14` }}
                 >
-                  <b.icon size={14} className="sm:hidden" style={{ color: b.color }} />
-                  <b.icon size={16} className="hidden sm:block" style={{ color: b.color }} />
+                  <b.icon size={20} style={{ color: b.color }} />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-body font-semibold text-[11px] sm:text-sm text-[#12162A] truncate">{b.label}</p>
-                  <p className="font-body text-[9px] sm:text-xs text-[#8890A6] truncate">{b.sub}</p>
+                  <p className="font-montserrat font-semibold text-xs sm:text-sm text-[#12162A] truncate">{b.label}</p>
+                  <p className="font-body text-[11px] sm:text-xs text-[#8890A6] truncate mt-0.5">{b.sub}</p>
                 </div>
               </div>
             ))}

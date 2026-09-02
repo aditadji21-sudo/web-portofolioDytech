@@ -1,27 +1,18 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { NAV_LINKS, CATEGORIES, STORE_INFO } from "@/lib/constants";
-import Image from "next/image";
-import logoWhite from "@/assets/Dytechputih.png"; // Sesuaikan dengan nama file logo putihmu
+import { Logo } from "@/components/Logo";
 
 export function Footer() {
   return (
     <footer className="bg-[#0E1226] text-[#B7BEDB] mt-24">
       <div className="max-w-6xl mx-auto px-6 md:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
-          <div className="mb-6">
-              <Image
-                src={logoWhite}
-                alt="Logo DYTECH"
-                width={600}
-                height={120}
-                style={{ width: 'auto', height: '180px' }} // Ketik manual baris ini. Coba angka 150px - 200px
-                className="object-contain"
-              />
-        </div>
-          <p className="font-body text-sm leading-relaxed text-[#8A92B5]">
-            Toko &amp; servis komputer di Malang. Rakitan PC, laptop, aksesoris, dan servis dengan komponen
-            bergaransi.
+          <div className="mb-5">
+            <Logo theme="dark" size="lg" asLink />
+          </div>
+          <p className="font-body text-sm leading-relaxed text-[#8A92B5] mt-3">
+            Toko &amp; servis komputer di Malang. Rakitan PC impian, laptop baru bergaransi resmi, aksesoris setup, dan servis transparan terpercaya.
           </p>
         </div>
 

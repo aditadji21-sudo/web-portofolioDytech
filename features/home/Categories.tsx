@@ -23,17 +23,18 @@ function CategoryCircle({ item, count, delay }: { item: Category; count: number;
     <Reveal delay={delay}>
       <Link
         href={`/produk?kategori=${encodeURIComponent(item.title)}`}
-        className="group flex flex-col items-center text-center gap-3"
+        className="group flex flex-col items-center text-center gap-3 transition-transform duration-300"
       >
         <div
-          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-4 border-white shadow-[0_4px_16px_rgba(18,22,42,0.08)] group-hover:-translate-y-1 group-hover:shadow-[0_10px_24px_rgba(18,22,42,0.12)] transition-all duration-300"
+          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center border-4 border-white shadow-[0_4px_16px_rgba(18,22,42,0.08)] group-hover:-translate-y-1.5 group-hover:shadow-[0_12px_28px_rgba(18,22,42,0.16)] transition-all duration-300 relative overflow-hidden"
           style={{ backgroundColor: item.accent }}
         >
-          <Icon size={30} className="text-white" strokeWidth={1.8} />
+          <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors" />
+          <Icon size={30} className="text-white relative z-10 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.8} />
         </div>
         <div>
-          <p className="font-body font-semibold text-sm text-[#12162A]">{item.title}</p>
-          <p className="font-mono text-[11px] text-[#8890A6]">{count} produk</p>
+          <p className="font-montserrat font-bold text-sm text-[#12162A] group-hover:text-[#2F5CF0] transition-colors">{item.title}</p>
+          <p className="font-mono text-[11px] text-[#8890A6] mt-0.5">{count} produk</p>
         </div>
       </Link>
     </Reveal>
@@ -44,18 +45,18 @@ export async function Categories() {
   const products = await getAllProducts();
 
   return (
-    <section id="kategori" className="relative px-4 sm:px-6 md:px-8 py-14 md:py-20 overflow-hidden bg-[#EAF0FF]">
+    <section id="kategori" className="relative px-4 sm:px-6 md:px-8 py-14 md:py-20 overflow-hidden bg-[#EAF0FF] rounded-3xl mx-2 sm:mx-4 md:mx-8">
       <div className="pointer-events-none absolute -top-10 -left-16 w-64 h-64 rounded-full bg-[#2F5CF0]/20 blur-[80px]" />
       <div className="pointer-events-none absolute top-1/2 -right-16 w-56 h-56 rounded-full bg-[#F6C623]/25 blur-[80px]" />
 
       <div className="max-w-6xl mx-auto relative">
         <Reveal className="flex items-end justify-between mb-10 md:mb-12">
           <div>
-            <span className="inline-block font-body text-xs font-bold tracking-wide text-white bg-[#2F5CF0] rounded-full px-3 py-1 mb-3">
+            <span className="inline-block font-montserrat text-xs font-bold tracking-wider text-white bg-[#2F5CF0] rounded-full px-3.5 py-1 mb-3 shadow-sm uppercase">
               KATEGORI
             </span>
-            <h2 className="font-display font-semibold text-2xl md:text-[32px] text-[#12162A] tracking-tight">
-              Belanja per kategori
+            <h2 className="font-montserrat font-extrabold text-2xl md:text-[32px] text-[#12162A] tracking-tight">
+              Belanja Per Kategori
             </h2>
           </div>
         </Reveal>
@@ -63,7 +64,7 @@ export async function Categories() {
         <div className="grid grid-cols-3 gap-y-10 gap-x-4 sm:gap-x-6 max-w-3xl mx-auto">
           {CATEGORIES.map((c, i) => {
             const count = products.filter((p) => p.category === c.title).length;
-            return <CategoryCircle key={c.title} item={c} count={count} delay={i * 90} />;
+            return <CategoryCircle key={c.title} item={c} count={count} delay={i * 70} />;
           })}
         </div>
       </div>

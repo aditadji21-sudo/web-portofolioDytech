@@ -6,13 +6,19 @@ import { CtaStrip } from "@/features/home/CtaStrip";
 
 export default function HomePage() {
   return (
-    // Tambahkan flex-col dan gap-12 (atau angka lain seperti gap-8, gap-16)
-    <main className="flex flex-col gap-12">
+    <div className="flex flex-col">
+      {/* Hero Section with Instagram Portrait Carousel */}
       <Hero />
+
+      {/* Brands Strip with Infinite Marquee and Brand Transitions */}
       <BrandsStrip />
-      <Categories />
-      <FeaturedProducts />
-      <CtaStrip />
-    </main>
+
+      {/* Categories & Product Discovery */}
+      <div className="space-y-12 md:space-y-16 py-8">
+        <Categories />
+        <FeaturedProducts />
+        <CtaStrip />
+      </div>
+    </div>
   );
 }

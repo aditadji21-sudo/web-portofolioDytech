@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
+import logoOri from "@/assets/dytech ori.png";
 
 export function AboutHeader() {
   return (
@@ -14,19 +15,20 @@ export function AboutHeader() {
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
             DYTECH Computer berawal dari meja servis kecil di Malang. Sekarang kami merakit PC, menjual laptop
-            & aksesoris, dan menangani servis — dengan prinsip yang sama sejak awal: jelaskan dulu, baru kerjakan.
+            &amp; aksesoris, dan menangani servis — dengan prinsip yang sama sejak awal: jelaskan dulu, baru kerjakan.
           </p>
         </Reveal>
 
-        {/* 2. Ini bagian kanan yang kita ganti jadi Image */}
+        {/* Official Brand Artwork */}
         <Reveal delay={150} className="flex justify-center md:justify-end">
-          <Image
-            src="/dytech uhuy.png" // <-- Ganti dengan nama file gambarmu yang ada di folder public
-            alt="DYTECH Computer"
-            width={1000} // Sesuaikan lebar gambarnya di sini
-            height={1000} // Sesuaikan tinggi gambarnya di sini
-            className="rounded-3xl object-cover shadow-xl"
-          />
+          <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden shadow-2xl border border-black/5 bg-[#0E1226]">
+            <Image
+              src={logoOri}
+              alt="DYTECH Computer Malang"
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
         </Reveal>
       </div>
     </section>
