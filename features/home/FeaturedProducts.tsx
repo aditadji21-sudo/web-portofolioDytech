@@ -11,15 +11,15 @@ export async function FeaturedProducts() {
   );
 
   return (
-    <section className="relative px-4 sm:px-6 md:px-8 py-16 md:py-20 overflow-hidden bg-[#FFF8E8] rounded-3xl mx-2 sm:mx-4 md:mx-8">
+    <section className="relative px-4 sm:px-6 md:px-8 py-10 sm:py-16 md:py-20 overflow-hidden bg-[#FFF8E8] rounded-2xl sm:rounded-3xl mx-3 sm:mx-4 md:mx-8">
       <div className="pointer-events-none absolute -bottom-20 left-1/3 w-72 h-72 rounded-full bg-[#F6C623]/20 blur-[100px]" />
       <div className="max-w-6xl mx-auto relative">
-        <Reveal className="flex items-end justify-between mb-10 md:mb-12 gap-4">
+        <Reveal className="flex items-end justify-between mb-8 sm:mb-10 md:mb-12 gap-4">
           <div>
-            <span className="inline-block font-montserrat text-xs font-bold tracking-wider text-white bg-[#F0323B] rounded-full px-3.5 py-1 mb-3 shadow-sm uppercase">
+            <span className="inline-block font-montserrat text-[10px] sm:text-xs font-bold tracking-wider text-white bg-[#F0323B] rounded-full px-3 sm:px-3.5 py-1 mb-2.5 sm:mb-3 shadow-sm uppercase">
               TERLARIS
             </span>
-            <h2 className="font-montserrat font-extrabold text-2xl md:text-[32px] text-[#12162A] tracking-tight">
+            <h2 className="font-montserrat font-extrabold text-xl sm:text-2xl md:text-[32px] text-[#12162A] tracking-tight">
               Produk Paling Dicari
             </h2>
           </div>
@@ -31,7 +31,7 @@ export async function FeaturedProducts() {
           </Link>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {featured.map((p, i) => (
             <Reveal key={p.slug} delay={(i % 6) * 70}>
               <ProductCard product={p} />

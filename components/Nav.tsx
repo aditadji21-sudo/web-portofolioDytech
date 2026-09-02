@@ -182,7 +182,7 @@ export function Nav({ products }: { products: Product[] }) {
         className={cn(
           "transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden",
           scrolled
-            ? "max-w-6xl mx-auto rounded-2xl bg-white/90 supports-[backdrop-filter]:bg-white/85 backdrop-blur-xl border border-black/[0.06] shadow-[0_4px_24px_rgba(18,22,42,0.08)]"
+            ? "max-w-5xl mx-auto rounded-2xl bg-white/90 supports-[backdrop-filter]:bg-white/85 backdrop-blur-xl border border-black/[0.06] shadow-[0_4px_24px_rgba(18,22,42,0.08)]"
             : "w-full bg-white border-b border-black/[0.05]"
         )}
       >
@@ -197,8 +197,10 @@ export function Nav({ products }: { products: Product[] }) {
         {/* Main Navbar Row */}
         <div
           className={cn(
-            "max-w-6xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between gap-4 sm:gap-6 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-            scrolled ? "h-14" : "h-16"
+            "mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            scrolled
+              ? "max-w-5xl px-3 sm:px-4 md:px-5 gap-3 sm:gap-4 h-14"
+              : "max-w-6xl px-4 sm:px-6 md:px-8 gap-4 sm:gap-6 md:gap-8 h-16 sm:h-[68px]"
           )}
         >
           {/* Logo with Link */}
@@ -212,7 +214,12 @@ export function Nav({ products }: { products: Product[] }) {
           </div>
 
           {/* Quick Nav Links on Larger Screens */}
-          <nav className="hidden lg:flex items-center gap-0.5">
+          <nav
+            className={cn(
+              "hidden lg:flex items-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              scrolled ? "gap-0.5" : "gap-2"
+            )}
+          >
             {NAV_LINKS.map((l) => {
               const isActive = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));
               return (
@@ -220,13 +227,19 @@ export function Nav({ products }: { products: Product[] }) {
                   key={l.href}
                   href={l.href}
                   className={cn(
-                    "font-montserrat text-[13px] font-medium px-3 py-1.5 rounded transition-colors",
+                    "relative font-montserrat font-medium rounded-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                    scrolled
+                      ? "text-[12.5px] px-2.5 py-1.5"
+                      : "text-[13px] px-4 py-2",
                     isActive
-                      ? "text-[#12162A]"
-                      : "text-[#667085] hover:text-[#12162A]"
+                      ? "text-[#12162A] bg-[#F3F5FB]"
+                      : "text-[#667085] hover:text-[#12162A] hover:bg-[#F3F5FB]/60"
                   )}
                 >
                   {l.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-[#2F5CF0] rounded-full" />
+                  )}
                 </Link>
               );
             })}
@@ -252,9 +265,9 @@ export function Nav({ products }: { products: Product[] }) {
               size="icon"
               onClick={() => setOpen(!open)}
               aria-label="Toggle navigation menu"
-              className="md:hidden rounded-lg border-black/10 bg-transparent hover:bg-[#F3F5FB] text-[#12162A] w-9 h-9"
+              className="lg:hidden rounded-lg border-black/10 bg-transparent hover:bg-[#F3F5FB] text-[#12162A] w-10 h-10 sm:w-9 sm:h-9"
             >
-              <MenuToggleIcon open={open} className="size-4" duration={300} />
+              <MenuToggleIcon open={open} className="size-[18px] sm:size-4" duration={300} />
             </Button>
           </div>
         </div>
@@ -267,9 +280,9 @@ export function Nav({ products }: { products: Product[] }) {
           )}
         >
           <div className="bg-[#2F5CF0]">
-            <div className="max-w-6xl mx-auto px-6 md:px-8 h-10 flex items-center gap-7 font-montserrat text-[13px] font-medium text-white/90 overflow-x-auto scroll-thin">
+            <div className="max-w-6xl mx-auto px-6 md:px-8 h-10 flex items-center gap-5 md:gap-7 lg:gap-8 font-montserrat text-[13px] font-medium text-white/90 overflow-x-auto scroll-thin">
               {NAV_LINKS.map((l) => (
-                <Link key={l.href} href={l.href} className="shrink-0 hover:text-white transition-colors">
+                <Link key={l.href} href={l.href} className="shrink-0 hover:text-white transition-colors py-1">
                   {l.label}
                 </Link>
               ))}
@@ -278,7 +291,7 @@ export function Nav({ products }: { products: Product[] }) {
                 <Link
                   key={c.title}
                   href={`/produk?kategori=${encodeURIComponent(c.title)}`}
-                  className="shrink-0 text-white/70 hover:text-white transition-colors"
+                  className="shrink-0 text-white/70 hover:text-white transition-colors py-1"
                 >
                   {c.title}
                 </Link>
@@ -291,12 +304,16 @@ export function Nav({ products }: { products: Product[] }) {
       {/* Mobile Drawer Menu */}
       <div
         className={cn(
-          "bg-white/98 supports-[backdrop-filter]:bg-white/95 backdrop-blur-xl fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col overflow-y-auto border-t border-black/5 md:hidden transition-all duration-300",
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          "bg-white/98 supports-[backdrop-filter]:bg-white/95 backdrop-blur-xl fixed right-0 bottom-0 left-0 z-50 flex flex-col overflow-y-auto border-t border-black/5 lg:hidden transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          scrolled ? "top-14 md:top-[calc(3.5rem+0.625rem)]" : "top-16 sm:top-[68px]",
+          open
+            ? "opacity-100 pointer-events-auto translate-y-0"
+            : "opacity-0 pointer-events-none translate-y-2"
         )}
       >
-        <div className="flex h-full w-full flex-col justify-between gap-y-4 p-5 max-w-lg mx-auto">
-          <div className="space-y-4">
+        <div className="flex h-full w-full flex-col justify-between gap-y-5 p-5 sm:p-6 max-w-lg mx-auto">
+          <div className="space-y-5">
+            {/* Mobile Search */}
             <SearchBox
               products={products}
               placeholder="Cari PC rakitan, laptop, aksesoris..."
@@ -304,8 +321,9 @@ export function Nav({ products }: { products: Product[] }) {
               onNavigate={() => setOpen(false)}
             />
 
-            <div className="grid gap-1 pt-2">
-              <p className="font-montserrat text-[10px] font-bold tracking-wider text-[#8890A6] uppercase px-3 mb-1">
+            {/* Navigation Links */}
+            <div className="grid gap-1.5 pt-1">
+              <p className="font-montserrat text-[10px] font-bold tracking-wider text-[#8890A6] uppercase px-3 mb-0.5">
                 Menu Utama
               </p>
               {NAV_LINKS.map((l) => {
@@ -315,21 +333,25 @@ export function Nav({ products }: { products: Product[] }) {
                     key={l.href}
                     href={l.href}
                     className={cn(
-                      "flex items-center px-3.5 py-2.5 rounded-lg font-montserrat text-sm font-medium transition-colors",
+                      "flex items-center px-4 py-3.5 rounded-xl font-montserrat text-[15px] font-medium transition-all duration-200",
                       isActive
-                        ? "text-[#12162A] bg-[#F3F5FB]"
-                        : "text-[#667085] hover:bg-[#F3F5FB] hover:text-[#12162A]"
+                        ? "text-[#12162A] bg-[#EBF0FF] shadow-[inset_0_0_0_1px_rgba(47,92,240,0.12)]"
+                        : "text-[#4A5568] active:bg-[#F3F5FB] hover:text-[#12162A]"
                     )}
                     onClick={() => setOpen(false)}
                   >
+                    {isActive && (
+                      <span className="w-1 h-5 bg-[#2F5CF0] rounded-full mr-3 shrink-0" />
+                    )}
                     {l.label}
                   </Link>
                 );
               })}
             </div>
 
-            <div className="pt-3 border-t border-black/5">
-              <p className="font-montserrat text-[10px] font-bold tracking-wider text-[#8890A6] uppercase px-3 mb-2">
+            {/* Kategori Produk */}
+            <div className="pt-4 border-t border-black/[0.06]">
+              <p className="font-montserrat text-[10px] font-bold tracking-wider text-[#8890A6] uppercase px-3 mb-2.5">
                 Kategori Produk
               </p>
               <div className="grid grid-cols-2 gap-2">
@@ -337,10 +359,10 @@ export function Nav({ products }: { products: Product[] }) {
                   <Link
                     key={c.title}
                     href={`/produk?kategori=${encodeURIComponent(c.title)}`}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-[#667085] hover:bg-[#F3F5FB] hover:text-[#12162A] transition-colors"
+                    className="flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-[13px] font-medium text-[#4A5568] active:bg-[#F3F5FB] hover:text-[#12162A] transition-all duration-200 bg-[#F9FAFC] border border-transparent hover:border-[#E2E8F0]"
                     onClick={() => setOpen(false)}
                   >
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: c.accent }} />
+                    <span className="w-2.5 h-2.5 rounded-full shrink-0 ring-2 ring-white shadow-sm" style={{ backgroundColor: c.accent }} />
                     <span className="truncate">{c.title}</span>
                   </Link>
                 ))}
@@ -348,18 +370,19 @@ export function Nav({ products }: { products: Product[] }) {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-black/5 flex flex-col gap-2.5">
+          {/* Bottom CTA */}
+          <div className="pt-4 border-t border-black/[0.06] flex flex-col gap-3 pb-[env(safe-area-inset-bottom,0px)]">
             <a
               href="https://wa.me/62881026014897"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "w-full rounded-full bg-[#F6C623] hover:bg-[#FFE169] text-[#12162A] font-montserrat font-semibold text-sm py-3 justify-center border-0"
+                "w-full rounded-2xl bg-[#F6C623] hover:bg-[#FFE169] text-[#12162A] font-montserrat font-semibold text-[15px] py-4 justify-center border-0 shadow-[0_4px_16px_rgba(246,198,35,0.3)] active:scale-[0.97] transition-all duration-200"
               )}
               onClick={() => setOpen(false)}
             >
-              <MessageCircle size={16} className="mr-2" /> Konsultasi via WhatsApp
+              <MessageCircle size={18} className="mr-2.5" /> Konsultasi via WhatsApp
             </a>
           </div>
         </div>

@@ -168,7 +168,7 @@ export function HeroCarousel() {
 
   return (
     <div
-      className="relative w-full max-w-[420px] sm:max-w-[440px] md:max-w-[460px] mx-auto select-none group"
+      className="relative w-full max-w-[360px] sm:max-w-[420px] md:max-w-[460px] mx-auto select-none group"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
@@ -183,10 +183,10 @@ export function HeroCarousel() {
       />
 
       {/* Main Instagram Portrait Card Frame (1080 x 1350 -> exact 4:5 Aspect Ratio) */}
-      <div className="relative w-full aspect-[4/5] rounded-[28px] sm:rounded-[32px] overflow-hidden border border-white/15 bg-[#0A0D18] shadow-[0_20px_60px_rgba(0,0,0,0.6)] flex flex-col justify-between backdrop-blur-xl">
+      <div className="relative w-full aspect-[4/5] rounded-[24px] sm:rounded-[28px] md:rounded-[32px] overflow-hidden border border-white/15 bg-[#0A0D18] shadow-[0_20px_60px_rgba(0,0,0,0.6)] flex flex-col justify-between backdrop-blur-xl">
         
         {/* Instagram Post Header Bar */}
-        <div className="relative z-20 px-4 sm:px-5 pt-4 pb-2.5 flex items-center justify-between border-b border-white/10 bg-[#06070B]/70 backdrop-blur-md">
+        <div className="relative z-20 px-3.5 sm:px-5 pt-3 sm:pt-4 pb-2 sm:pb-2.5 flex items-center justify-between border-b border-white/10 bg-[#06070B]/70 backdrop-blur-md">
           <div className="flex items-center gap-2.5">
             {/* DYTECH Avatar with Instagram-style Story Gradient Ring */}
             <div className="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-[#F6C623] via-[#F0323B] to-[#2F5CF0] flex items-center justify-center shrink-0">
@@ -225,7 +225,7 @@ export function HeroCarousel() {
         </div>
 
         {/* Slide Body / Visual Showcase */}
-        <div className="relative z-10 flex-1 px-5 sm:px-6 py-4 flex flex-col justify-between overflow-hidden">
+        <div className="relative z-10 flex-1 px-4 sm:px-6 py-3 sm:py-4 flex flex-col justify-between overflow-hidden">
           {/* Background Gradient Mesh */}
           <div
             className={`absolute inset-0 bg-gradient-to-b ${slide.bgGradient} opacity-90 transition-all duration-700`}

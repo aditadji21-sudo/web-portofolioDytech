@@ -14,7 +14,7 @@ export default function HomePage() {
       <BrandsStrip />
 
       {/* Categories & Product Discovery */}
-      <div className="space-y-12 md:space-y-16 py-8">
+      <div className="space-y-6 sm:space-y-10 md:space-y-16 py-6 sm:py-8">
         <Categories />
         <FeaturedProducts />
         <CtaStrip />
