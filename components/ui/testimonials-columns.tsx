@@ -38,7 +38,8 @@ export const TestimonialsColumn = (props: {
                   src={t.image}
                   alt={t.alt || `Testimoni ${i + 1}`}
                   className="w-full h-auto object-cover block"
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
                 />
               </div>
             ))}

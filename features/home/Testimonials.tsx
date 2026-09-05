@@ -7,21 +7,21 @@ import { Star } from "lucide-react";
 
 // All images from public/testimoni folder
 const testimonials: Testimonial[] = [
-  { image: "/testimoni/Advan.png", alt: "Testimoni pembelian Advan" },
-  { image: "/testimoni/Legion1.jpeg", alt: "Testimoni Lenovo Legion" },
-  { image: "/testimoni/alcatrox.png", alt: "Testimoni Alcatrox" },
-  { image: "/testimoni/asustuf.png", alt: "Testimoni ASUS TUF" },
-  { image: "/testimoni/asustuf1.png", alt: "Testimoni ASUS TUF 2" },
-  { image: "/testimoni/laptopadvan.png", alt: "Testimoni laptop Advan" },
-  { image: "/testimoni/laptoplenovo.png", alt: "Testimoni laptop Lenovo" },
-  { image: "/testimoni/laptoplenovoasus.png", alt: "Testimoni laptop Lenovo ASUS" },
-  { image: "/testimoni/legion2.jpeg", alt: "Testimoni Legion 2" },
-  { image: "/testimoni/printerepsonl3211.png", alt: "Testimoni printer Epson L3211" },
-  { image: "/testimoni/printerepsonl3251.png", alt: "Testimoni printer Epson L3251" },
-  { image: "/testimoni/printerhp.png", alt: "Testimoni printer HP" },
-  { image: "/testimoni/printerhp583.png", alt: "Testimoni printer HP 583" },
-  { image: "/testimoni/proyektorepson.png", alt: "Testimoni proyektor Epson" },
-  { image: "/testimoni/samsungmonitor.png", alt: "Testimoni Samsung monitor" },
+  { image: "/testimoni/Advan.webp", alt: "Testimoni pembelian Advan" },
+  { image: "/testimoni/Legion1.webp", alt: "Testimoni Lenovo Legion" },
+  { image: "/testimoni/alcatrox.webp", alt: "Testimoni Alcatrox" },
+  { image: "/testimoni/asustuf.webp", alt: "Testimoni ASUS TUF" },
+  { image: "/testimoni/asustuf1.webp", alt: "Testimoni ASUS TUF 2" },
+  { image: "/testimoni/laptopadvan.webp", alt: "Testimoni laptop Advan" },
+  { image: "/testimoni/laptoplenovo.webp", alt: "Testimoni laptop Lenovo" },
+  { image: "/testimoni/laptoplenovoasus.webp", alt: "Testimoni laptop Lenovo ASUS" },
+  { image: "/testimoni/legion2.webp", alt: "Testimoni Legion 2" },
+  { image: "/testimoni/printerepsonl3211.webp", alt: "Testimoni printer Epson L3211" },
+  { image: "/testimoni/printerepsonl3251.webp", alt: "Testimoni printer Epson L3251" },
+  { image: "/testimoni/printerhp.webp", alt: "Testimoni printer HP" },
+  { image: "/testimoni/printerhp583.webp", alt: "Testimoni printer HP 583" },
+  { image: "/testimoni/proyektorepson.webp", alt: "Testimoni proyektor Epson" },
+  { image: "/testimoni/samsungmonitor.webp", alt: "Testimoni Samsung monitor" },
 ];
 
 // Desktop: 3 columns (5 items each)
