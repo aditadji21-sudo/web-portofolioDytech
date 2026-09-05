@@ -28,7 +28,7 @@ export function Preloader() {
         const next = prev + step + (Math.random() * 2 - 0.5);
         if (next >= 100) {
           clearInterval(timer);
-          setStatusText("SYSTEM READY • WELCOME TO DYTECH");
+          setStatusText("SYSTEM READY • WELCOME TO Dytech");
           setTimeout(() => {
             setIsExiting(true);
             sessionStorage.setItem("dytech_preloaded", "1");
@@ -44,7 +44,7 @@ export function Preloader() {
         } else if (next > 40) {
           setStatusText("LOADING CATALOG & HARDWARE SPECS...");
         } else if (next > 15) {
-          setStatusText("INITIALIZING DYTECH COMPUTER MALANG...");
+          setStatusText("INITIALIZING Dytech COMPUTER MALANG...");
         }
 
         return Math.min(next, 99);
@@ -83,7 +83,7 @@ export function Preloader() {
             <div className="relative w-14 h-14 rounded-full overflow-hidden shadow-[0_0_24px_rgba(47,92,240,0.6)]">
               <Image
                 src={logoOri}
-                alt="DYTECH Computer"
+                alt="Dytech Computer"
                 className="w-full h-full object-cover"
                 priority
               />
@@ -94,7 +94,7 @@ export function Preloader() {
           <div className="h-8 w-auto flex items-center justify-center">
             <Image
               src={logoPutih}
-              alt="DYTECH Computer"
+              alt="Dytech Computer"
               className="h-7 w-auto object-contain"
               priority
             />

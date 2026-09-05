@@ -28,7 +28,7 @@ function accentFor(category: string) {
 // otomatis dari spesifikasi supaya halaman tetap enak dibaca.
 function fallbackDescription(product: Product) {
   const specText = product.specs.join(", ");
-  return `${product.name} dari kategori ${product.category} ini dibekali ${specText}. Unit siap dipesan di DYTECH Computer, konsultasikan kebutuhan atau spesifikasi tambahan lewat WhatsApp sebelum melakukan pembelian.`;
+  return `${product.name} dari kategori ${product.category} ini dibekali ${specText}. Unit siap dipesan di Dytech Computer, konsultasikan kebutuhan atau spesifikasi tambahan lewat WhatsApp sebelum melakukan pembelian.`;
 }
 
 export function ProductDetail({ product, allProducts }: { product: Product; allProducts: Product[] }) {
@@ -37,7 +37,7 @@ export function ProductDetail({ product, allProducts }: { product: Product; allP
   const gallery = product.images && product.images.length > 0 ? product.images : [mainImage as string];
   const [activeImage, setActiveImage] = useState<string | typeof imgPc>(gallery[0]);
 
-  const waText = encodeURIComponent(`Halo DYTECH, saya mau tanya tentang ${product.name}.`);
+  const waText = encodeURIComponent(`Halo Dytech, saya mau tanya tentang ${product.name}.`);
   const waLink = `https://wa.me/${STORE_INFO.whatsapp}?text=${waText}`;
 
   const related = allProducts.filter(

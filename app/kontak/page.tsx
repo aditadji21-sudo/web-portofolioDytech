@@ -4,8 +4,8 @@ import { ContactInfo } from "@/features/kontak/ContactInfo";
 import { ContactForm } from "@/features/kontak/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Kontak — DYTECH Computer",
-  description: "Hubungi DYTECH Computer untuk konsultasi rakitan PC, laptop, aksesoris, atau servis.",
+  title: "Kontak — Dytech Computer",
+  description: "Hubungi Dytech Computer untuk konsultasi rakitan PC, laptop, aksesoris, atau servis.",
 };
 
 export default function KontakPage() {

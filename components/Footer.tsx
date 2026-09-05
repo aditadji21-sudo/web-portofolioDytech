@@ -64,7 +64,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono text-[11px] tracking-wide text-[#6E76A0]">
-            © 2026 DYTECH COMPUTER. ALL RIGHTS RESERVED.
+            © 2026 Dytech Computer. All Rights Reserved.
           </p>
           <p className="font-mono text-[11px] tracking-wide text-[#6E76A0]">
             {STORE_INFO.hours.map((h) => `${h.day} ${h.time}`).join("  ·  ")}

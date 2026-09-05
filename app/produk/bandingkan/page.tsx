@@ -5,8 +5,8 @@ import { CompareProcessor } from "@/features/produk/CompareProcessor";
 import { getAllProducts } from "@/lib/getProducts";
 
 export const metadata = {
-  title: "Bandingkan Processor Laptop — DYTECH Computer",
-  description: "Bandingkan spesifikasi processor antar laptop di DYTECH Computer sebelum memutuskan pilihan.",
+  title: "Bandingkan Processor Laptop — Dytech Computer",
+  description: "Bandingkan spesifikasi processor antar laptop di Dytech Computer sebelum memutuskan pilihan.",
 };
 
 export default async function BandingkanPage() {

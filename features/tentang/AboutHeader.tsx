@@ -14,7 +14,7 @@ export function AboutHeader() {
             Toko komputer yang jujur soal spek dan harga
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
-            DYTECH Computer berawal dari meja servis kecil di Malang. Sekarang kami merakit PC, menjual laptop
+            Dytech Computer berawal dari meja servis kecil di Malang. Sekarang kami merakit PC, menjual laptop
             &amp; aksesoris, dan menangani servis — dengan prinsip yang sama sejak awal: jelaskan dulu, baru kerjakan.
           </p>
         </Reveal>
@@ -24,7 +24,7 @@ export function AboutHeader() {
           <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden shadow-2xl border border-black/5 bg-[#0E1226]">
             <Image
               src={logoOri}
-              alt="DYTECH Computer Malang"
+              alt="Dytech Computer Malang"
               className="w-full h-full object-cover"
               priority
             />

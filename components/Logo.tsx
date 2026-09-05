@@ -51,7 +51,7 @@ export function Logo({
     imageElement = (
       <Image
         src={logoPutih}
-        alt="DYTECH Computer"
+        alt="Dytech Computer"
         className={`${heightClasses[size]} w-auto object-contain select-none`}
         priority={priority}
       />
@@ -62,7 +62,7 @@ export function Logo({
       <div className={`relative ${oriSizeClasses[size]} overflow-hidden shadow-sm shrink-0 select-none`}>
         <Image
           src={logoOri}
-          alt="DYTECH Computer"
+          alt="Dytech Computer"
           className="w-full h-full object-cover"
           priority={priority}
         />
@@ -73,7 +73,7 @@ export function Logo({
     imageElement = (
       <Image
         src={logoUhuy}
-        alt="DYTECH Computer"
+        alt="Dytech Computer"
         className={`${heightClasses[size]} w-auto object-contain select-none`}
         priority={priority}
       />
@@ -88,7 +88,7 @@ export function Logo({
 
   if (asLink) {
     return (
-      <Link href="/" className="inline-flex items-center shrink-0 hover:opacity-90 transition-opacity" aria-label="DYTECH Computer Beranda">
+      <Link href="/" className="inline-flex items-center shrink-0 hover:opacity-90 transition-opacity" aria-label="Dytech Computer Beranda">
         {content}
       </Link>
     );

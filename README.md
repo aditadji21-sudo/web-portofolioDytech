@@ -1,4 +1,4 @@
-# DYTECH Computer — Website
+# Dytech Computer — Website
 
 Struktur project (Next.js App Router + TypeScript + Tailwind v4):
 

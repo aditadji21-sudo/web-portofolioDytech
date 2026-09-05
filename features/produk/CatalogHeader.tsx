@@ -11,7 +11,7 @@ export function CatalogHeader() {
             KATALOG
           </span>
           <h1 className="font-display font-semibold text-2xl md:text-[38px] text-[#12162A] tracking-tight max-w-2xl">
-            Produk &amp; layanan DYTECH Computer
+            Produk &amp; layanan Dytech Computer
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
             Semua unit rakitan, laptop, aksesoris, dan paket servis kami — harga bisa berubah sesuai ketersediaan

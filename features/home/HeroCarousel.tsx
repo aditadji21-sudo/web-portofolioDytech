@@ -39,7 +39,7 @@ const SLIDES: SlideItem[] = [
     id: "pc-gaming-beast",
     tag: "POPULAR BUILD",
     badgeColor: "#F6C623",
-    title: "DYTECH TITAN X",
+    title: "Dytech TITAN X",
     subtitle: "Custom Gaming & High-FPS Esports Rig",
     specs: [
       "Intel i7 14700KF / Ryzen 7 7800X3D",
@@ -59,7 +59,7 @@ const SLIDES: SlideItem[] = [
     id: "pc-workstation-pro",
     tag: "PRO CREATOR",
     badgeColor: "#5C82FF",
-    title: "DYTECH PRO RENDER",
+    title: "Dytech PRO RENDER",
     subtitle: "Workstation 4K/8K Video, 3D & AI Rendering",
     specs: [
       "AMD Ryzen 9 7900X (12 Core / 24 Thread)",
@@ -145,7 +145,7 @@ export function HeroCarousel() {
   const slide = SLIDES[current];
 
   const waConsultUrl = `https://wa.me/${STORE_INFO.whatsapp}?text=${encodeURIComponent(
-    `Halo DYTECH Computer, saya tertarik dengan paket [${slide.title} - ${slide.category}] di Carousel. Mau tanya info detail dan konsultasi budget.`
+    `Halo Dytech Computer, saya tertarik dengan paket [${slide.title} - ${slide.category}] di Carousel. Mau tanya info detail dan konsultasi budget.`
   )}`;
 
   // Touch Handlers for Swipe
@@ -188,12 +188,12 @@ export function HeroCarousel() {
         {/* Instagram Post Header Bar */}
         <div className="relative z-20 px-3.5 sm:px-5 pt-3 sm:pt-4 pb-2 sm:pb-2.5 flex items-center justify-between border-b border-white/10 bg-[#06070B]/70 backdrop-blur-md">
           <div className="flex items-center gap-2.5">
-            {/* DYTECH Avatar with Instagram-style Story Gradient Ring */}
+            {/* Dytech Avatar with Instagram-style Story Gradient Ring */}
             <div className="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-[#F6C623] via-[#F0323B] to-[#2F5CF0] flex items-center justify-center shrink-0">
               <div className="w-full h-full rounded-full overflow-hidden bg-[#0E1226] flex items-center justify-center">
                 <Image
                   src={logoOri}
-                  alt="DYTECH Computer"
+                  alt="Dytech Computer"
                   className="w-full h-full object-cover"
                 />
               </div>

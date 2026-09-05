@@ -1,4 +1,4 @@
-// Rekonstruksi geometri logo DYTECH (lingkaran konsentris / orbit)
+// Rekonstruksi geometri logo Dytech (lingkaran konsentris / orbit)
 // sebagai elemen visual berulang di seluruh situs.
 export function OrbitMark({
   size = 420,

@@ -1,4 +1,4 @@
-// Brand tokens diambil dari palet logo DYTECH Computer:
+// Brand tokens diambil dari palet logo Dytech Computer:
 // biru elektrik, kuning emas, merah aksen.
 export const BRAND = {
   bg: "#06070B",

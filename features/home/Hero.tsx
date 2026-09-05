@@ -25,7 +25,7 @@ const BADGES = [
 
 export function Hero() {
   const waUrl = `https://wa.me/${STORE_INFO.whatsapp}?text=${encodeURIComponent(
-    "Halo DYTECH Computer, saya ingin konsultasi rakit PC / cari laptop / tanya servis."
+    "Halo Dytech Computer, saya ingin konsultasi rakit PC / cari laptop / tanya servis."
   )}`;
 
   return (

@@ -18,10 +18,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const products = await getAllProducts();
   const product = products.find((p) => p.slug === decodeURIComponent(slug));
-  if (!product) return { title: "Produk tidak ditemukan — DYTECH Computer" };
+  if (!product) return { title: "Produk tidak ditemukan — Dytech Computer" };
 
   return {
-    title: `${product.name} — DYTECH Computer`,
+    title: `${product.name} — Dytech Computer`,
     description: product.description ?? product.specs.join(", "),
   };
 }
