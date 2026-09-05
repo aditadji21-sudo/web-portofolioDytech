@@ -3,6 +3,7 @@ import { Categories } from "@/features/home/Categories";
 import { FeaturedProducts } from "@/features/home/FeaturedProducts";
 import { BrandsStrip } from "@/features/home/BrandsStrip";
 import { CtaStrip } from "@/features/home/CtaStrip";
+import { Testimonials } from "@/features/home/Testimonials";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
       <div className="space-y-6 sm:space-y-10 md:space-y-16 py-6 sm:py-8">
         <Categories />
         <FeaturedProducts />
+        <Testimonials />
         <CtaStrip />
       </div>
     </div>

@@ -6,7 +6,7 @@ import { Logo } from "@/components/Logo";
 export function Footer() {
   return (
     <footer className="bg-[#0E1226] text-[#B7BEDB] mt-24">
-      <div className="max-w-6xl mx-auto px-6 md:px-8 py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-10 sm:py-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
         <div>
           <div className="mb-5">
             <Logo theme="dark" size="lg" asLink />
@@ -62,7 +62,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono text-[11px] tracking-wide text-[#6E76A0]">
             © 2026 DYTECH COMPUTER. ALL RIGHTS RESERVED.
           </p>

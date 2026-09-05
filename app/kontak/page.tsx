@@ -12,7 +12,7 @@ export default function KontakPage() {
   return (
     <>
       <KontakHeader />
-      <section className="px-6 md:px-8 pb-24">
+      <section className="px-4 sm:px-6 md:px-8 pb-24">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
           <ContactInfo />
           <ContactForm />

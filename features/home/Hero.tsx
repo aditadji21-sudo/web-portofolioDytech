@@ -38,13 +38,13 @@ export function Hero() {
       {/* Main Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-8 pt-8 sm:pt-14 md:pt-20 pb-10 sm:pb-14 md:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          
+
           {/* Left Column: Heading, Value Prop, CTA */}
           <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left">
             <Reveal>
               <div className="inline-flex items-center gap-2 font-montserrat text-[10px] sm:text-[11px] font-semibold tracking-[0.12em] text-[#2F5CF0] bg-[#DBE1FF]/50 rounded-full px-3 sm:px-3.5 py-1.5 mb-4 sm:mb-5 mx-auto lg:mx-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#2F5CF0] animate-pulse" />
-                TOKO & SERVIS KOMPUTER — MALANG
+                TOKO & SERVIS KOMPUTER, MALANG
               </div>
             </Reveal>
 
@@ -119,11 +119,11 @@ export function Hero() {
 
         {/* Feature Badges */}
         <Reveal delay={260}>
-          <div className="flex sm:grid sm:grid-cols-3 gap-3 sm:gap-4 mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-[#E2E8F0] overflow-x-auto scroll-thin pb-2 sm:pb-0 -mx-5 px-5 sm:mx-0 sm:px-0">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-[#E2E8F0]">
             {BADGES.map((b) => (
               <div
                 key={b.label}
-                className="flex items-center gap-3 sm:gap-3.5 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 bg-white/70 border border-[#E2E8F0] hover:bg-white hover:shadow-sm transition-all duration-200 min-w-[220px] sm:min-w-0 shrink-0 sm:shrink"
+                className="flex items-center gap-3 sm:gap-3.5 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 bg-white/70 border border-[#E2E8F0] hover:bg-white hover:shadow-sm transition-all duration-200"
               >
                 <div
                   className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg flex items-center justify-center"
