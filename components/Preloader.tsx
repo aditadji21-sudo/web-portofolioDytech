@@ -13,10 +13,16 @@ export function Preloader() {
 
   useEffect(() => {
     // Check if user already saw the preloader in this session
-    const hasSeen = sessionStorage.getItem("dytech_preloaded");
-    if (hasSeen) {
-      setMounted(false);
-      return;
+    // NOTE: wrapped in try-catch because Safari iOS (esp. private browsing)
+    // throws when accessing sessionStorage
+    try {
+      const hasSeen = sessionStorage.getItem("dytech_preloaded");
+      if (hasSeen) {
+        setMounted(false);
+        return;
+      }
+    } catch {
+      // sessionStorage unavailable (Safari private mode, etc.) — proceed
     }
 
     const duration = 1400; // ms
@@ -28,31 +34,50 @@ export function Preloader() {
         const next = prev + step + (Math.random() * 2 - 0.5);
         if (next >= 100) {
           clearInterval(timer);
-          setStatusText("SYSTEM READY • WELCOME TO Dytech");
-          setTimeout(() => {
-            setIsExiting(true);
-            sessionStorage.setItem("dytech_preloaded", "1");
-            setTimeout(() => {
-              setMounted(false);
-            }, 600);
-          }, 200);
           return 100;
         }
-
-        if (next > 70) {
-          setStatusText("CALIBRATING HIGH-PERFORMANCE RIGS...");
-        } else if (next > 40) {
-          setStatusText("LOADING CATALOG & HARDWARE SPECS...");
-        } else if (next > 15) {
-          setStatusText("INITIALIZING Dytech COMPUTER MALANG...");
-        }
-
         return Math.min(next, 99);
       });
     }, interval);
 
     return () => clearInterval(timer);
   }, []);
+
+  // Separate effect for status text — avoids calling setState inside
+  // another setState's updater (React antipattern that can break in Safari)
+  useEffect(() => {
+    if (progress === 0) {
+      setStatusText("INITIALIZING SYSTEM...");
+    } else if (progress > 0 && progress < 15) {
+      setStatusText("INITIALIZING SYSTEM...");
+    } else if (progress < 40) {
+      setStatusText("INITIALIZING Dytech COMPUTER MALANG...");
+    } else if (progress < 70) {
+      setStatusText("LOADING CATALOG & HARDWARE SPECS...");
+    } else if (progress < 100) {
+      setStatusText("CALIBRATING HIGH-PERFORMANCE RIGS...");
+    } else {
+      setStatusText("SYSTEM READY • WELCOME TO Dytech");
+    }
+  }, [progress]);
+
+  // Separate effect for exit animation & sessionStorage write
+  useEffect(() => {
+    if (progress >= 100) {
+      const exitTimer = setTimeout(() => {
+        setIsExiting(true);
+        try {
+          sessionStorage.setItem("dytech_preloaded", "1");
+        } catch {
+          // sessionStorage unavailable — ignore
+        }
+        setTimeout(() => {
+          setMounted(false);
+        }, 600);
+      }, 200);
+      return () => clearTimeout(exitTimer);
+    }
+  }, [progress]);
 
   if (!mounted) return null;
 
