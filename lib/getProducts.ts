@@ -1,5 +1,6 @@
 import { ALL_PRODUCTS as STATIC_PRODUCTS } from "./all-products";
 import type { Product, Processor } from "./constants";
+import { gdriveImageUrl, gdriveImageUrls } from "./gdrive";
 
 // Isi SHEET_ID & SHEET_NAME di file .env.local (lihat .env.local.example).
 // Kalau belum di-set, web otomatis pakai data statis di /lib sebagai fallback
@@ -34,6 +35,12 @@ function toProduct(row: SheetRow): Product | null {
       }
     : undefined;
 
+  // Field image & images otomatis di-convert dari Google Drive file ID/URL
+  // ke direct image link. Path lokal tetap jalan apa adanya (backward compatible).
+  const rawImage = row.image?.trim() || undefined;
+  const cleanImage = (rawImage === "photo_attached" || rawImage === "undefined" || rawImage === "null" || rawImage === "-") ? undefined : rawImage;
+  const rawImages = row.images ? splitList(row.images) : undefined;
+
   return {
     slug: row.slug.trim(),
     name: row.name.trim(),
@@ -41,8 +48,8 @@ function toProduct(row: SheetRow): Product | null {
     price: row.price?.trim() ?? "",
     specs: splitList(row.specs),
     badge: row.badge?.trim() || undefined,
-    image: row.image?.trim() || undefined,
-    images: row.images ? splitList(row.images) : undefined,
+    image: gdriveImageUrl(cleanImage),
+    images: gdriveImageUrls(rawImages),
     description: row.description?.trim() || undefined,
     stock: row.stock?.trim() || undefined,
     sku: row.sku?.trim() || undefined,

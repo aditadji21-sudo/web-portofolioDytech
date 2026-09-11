@@ -18,6 +18,10 @@ const CATEGORY_IMAGE: Record<string, typeof imgPc> = {
   Laptop: imgLaptop,
   Aksesoris: imgAksesoris,
   "Servis & Upgrade": imgServis,
+  Speaker: imgAksesoris,
+  Printer: imgAksesoris,
+  Monitor: imgPc,
+  Komponen: imgPc,
 };
 
 function accentFor(category: string) {
