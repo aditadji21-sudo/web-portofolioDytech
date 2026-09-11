@@ -22,7 +22,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Dytech Computer — Toko & Servis Komputer Malang",
+  title: "Dytech Computer - Toko & Servis Komputer Malang",
   description:
     "Dytech Computer merakit PC impian, menjual laptop & aksesoris, serta menangani servis cepat dengan garansi resmi di Malang.",
   icons: {
