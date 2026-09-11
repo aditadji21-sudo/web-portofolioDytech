@@ -24,6 +24,15 @@ function accentFor(category: string) {
   return CATEGORIES.find((c) => c.title === category)?.accent ?? "#2F5CF0";
 }
 
+// Cek apakah image adalah URL external (Google Drive, Cloudinary, dll)
+function isExternalUrl(src: string | undefined): boolean {
+  return !!src && (src.startsWith("http://") || src.startsWith("https://"));
+}
+
+function isValidLocalPath(src: string | undefined): boolean {
+  return !!src && src.startsWith("/");
+}
+
 // Kalau deskripsi belum diisi manual di data produk, susun paragraf singkat
 // otomatis dari spesifikasi supaya halaman tetap enak dibaca.
 function fallbackDescription(product: Product) {
@@ -33,7 +42,13 @@ function fallbackDescription(product: Product) {
 
 export function ProductDetail({ product, allProducts }: { product: Product; allProducts: Product[] }) {
   const accent = accentFor(product.category);
-  const mainImage = product.image || CATEGORY_IMAGE[product.category] || imgPc;
+  // Kalau image berupa URL external (Google Drive), pakai langsung.
+  // Kalau path lokal atau kosong, fallback ke static import per kategori.
+  const mainImage = isExternalUrl(product.image)
+    ? product.image!
+    : isValidLocalPath(product.image)
+    ? product.image!
+    : CATEGORY_IMAGE[product.category] || imgPc;
   const gallery = product.images && product.images.length > 0 ? product.images : [mainImage as string];
   const [activeImage, setActiveImage] = useState<string | typeof imgPc>(gallery[0]);
 
