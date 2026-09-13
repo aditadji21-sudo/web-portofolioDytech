@@ -8,74 +8,57 @@ import logoOri from "@/assets/dytech ori.png";
 export function Preloader() {
   const [mounted, setMounted] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("INITIALIZING SYSTEM...");
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Check if user already saw the preloader in this session
-    // NOTE: wrapped in try-catch because Safari iOS (esp. private browsing)
-    // throws when accessing sessionStorage
+    // Check if user already visited in this session
     try {
-      const hasSeen = sessionStorage.getItem("dytech_preloaded");
+      const hasSeen = sessionStorage.getItem("dytech_preloaded_v2");
       if (hasSeen) {
         setMounted(false);
         return;
       }
     } catch {
-      // sessionStorage unavailable (Safari private mode, etc.) — proceed
+      // Safari private mode fallback
     }
 
-    const duration = 1400; // ms
-    const interval = 20; // ms
-    const step = 100 / (duration / interval);
+    const duration = 1200; // ms
+    const interval = 16; // ~60fps
+    const totalSteps = duration / interval;
+    let stepCount = 0;
 
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + step + (Math.random() * 2 - 0.5);
-        if (next >= 100) {
-          clearInterval(timer);
-          return 100;
-        }
-        return Math.min(next, 99);
-      });
+      stepCount++;
+      // Smooth ease-out progress curve
+      const t = Math.min(1, stepCount / totalSteps);
+      const easeProgress = Math.round(100 * (1 - Math.pow(1 - t, 3)));
+
+      setProgress(easeProgress);
+
+      if (t >= 1) {
+        clearInterval(timer);
+      }
     }, interval);
 
     return () => clearInterval(timer);
   }, []);
 
-  // Separate effect for status text — avoids calling setState inside
-  // another setState's updater (React antipattern that can break in Safari)
-  useEffect(() => {
-    if (progress === 0) {
-      setStatusText("INITIALIZING SYSTEM...");
-    } else if (progress > 0 && progress < 15) {
-      setStatusText("INITIALIZING SYSTEM...");
-    } else if (progress < 40) {
-      setStatusText("INITIALIZING Dytech COMPUTER MALANG...");
-    } else if (progress < 70) {
-      setStatusText("LOADING CATALOG & HARDWARE SPECS...");
-    } else if (progress < 100) {
-      setStatusText("CALIBRATING HIGH-PERFORMANCE RIGS...");
-    } else {
-      setStatusText("SYSTEM READY • WELCOME TO Dytech");
-    }
-  }, [progress]);
-
-  // Separate effect for exit animation & sessionStorage write
+  // Exit transition trigger
   useEffect(() => {
     if (progress >= 100) {
-      const exitTimer = setTimeout(() => {
+      const timer = setTimeout(() => {
         setIsExiting(true);
         try {
-          sessionStorage.setItem("dytech_preloaded", "1");
+          sessionStorage.setItem("dytech_preloaded_v2", "1");
         } catch {
-          // sessionStorage unavailable — ignore
+          // ignore
         }
         setTimeout(() => {
           setMounted(false);
-        }, 600);
-      }, 200);
-      return () => clearTimeout(exitTimer);
+        }, 700);
+      }, 250);
+
+      return () => clearTimeout(timer);
     }
   }, [progress]);
 
@@ -84,62 +67,74 @@ export function Preloader() {
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#06070B] text-white transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#07080E] select-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isExiting
-          ? "opacity-0 pointer-events-none scale-105 backdrop-blur-none"
-          : "opacity-100 scale-100"
+          ? "opacity-0 scale-[1.04] pointer-events-none filter blur-sm"
+          : "opacity-100 scale-100 filter-none"
       }`}
     >
-      {/* Ambient background glows */}
-      <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#2F5CF0]/25 blur-[120px] animate-pulse" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#F6C623]/15 blur-[120px] animate-pulse" />
+      {/* Background Tech Grid & Ambient Glows */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none opacity-40" />
+      
+      {/* Dynamic Ambient Auras */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-[#2F5CF0]/20 blur-[130px] pointer-events-none animate-pulse" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] rounded-full bg-[#F6C623]/12 blur-[90px] pointer-events-none" />
 
-      <div className="relative flex flex-col items-center max-w-sm w-full px-6 text-center">
-        {/* Animated Brand Emblem using official dytech ori.png & Dytechputih.png */}
-        <div className="relative mb-6 flex flex-col items-center">
-          <div className="relative w-24 h-24 mb-4 flex items-center justify-center">
-            {/* Outer rotating dashed ring */}
-            <div className="absolute inset-0 rounded-full border border-dashed border-[#F6C623]/50 animate-[spin_8s_linear_infinite]" />
+      {/* Main Content Container */}
+      <div className="relative flex flex-col items-center max-w-xs w-full px-6 text-center">
+        {/* Emblem & Glowing Shield */}
+        <div className="relative mb-6 flex flex-col items-center group">
+          {/* Outer Breathing Ring */}
+          <div className="relative w-20 h-20 flex items-center justify-center">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-[#2F5CF0]/30 to-[#F6C623]/30 blur-md transition-all duration-700 animate-pulse" />
             
-            {/* Middle counter-rotating gradient ring */}
-            <div className="absolute inset-2 rounded-full border-2 border-transparent border-t-[#2F5CF0] border-r-[#F6C623] border-b-[#F0323B] animate-[spin_3s_linear_infinite_reverse]" />
-            
-            {/* Inner official logo emblem */}
-            <div className="relative w-14 h-14 rounded-full overflow-hidden shadow-[0_0_24px_rgba(47,92,240,0.6)]">
+            {/* Subtle Glass Border */}
+            <div className="absolute inset-0 rounded-2xl border border-white/10 bg-[#0C0E1A]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]" />
+
+            {/* Inner Official Logo */}
+            <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(47,92,240,0.5)]">
               <Image
                 src={logoOri}
                 alt="Dytech Computer"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transform transition-transform duration-500 scale-105"
                 priority
               />
             </div>
           </div>
 
-          {/* Official Brand Logo */}
-          <div className="h-8 w-auto flex items-center justify-center">
-            <Image
-              src={logoPutih}
-              alt="Dytech Computer"
-              className="h-7 w-auto object-contain"
-              priority
-            />
+          {/* Clean Brand Typography */}
+          <div className="mt-4 flex flex-col items-center">
+            <div className="h-6 w-auto flex items-center justify-center">
+              <Image
+                src={logoPutih}
+                alt="Dytech"
+                className="h-5 w-auto object-contain opacity-95"
+                priority
+              />
+            </div>
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#8A92B5] uppercase mt-1">
+              Computer Malang
+            </span>
           </div>
         </div>
 
-        {/* Progress Bar Container */}
-        <div className="w-full bg-[#12162A] rounded-full h-1.5 overflow-hidden p-0.5 border border-white/10 mb-3 shadow-inner">
-          <div
-            className="h-full rounded-full bg-gradient-to-r from-[#2F5CF0] via-[#F6C623] to-[#F0323B] transition-all duration-100 ease-out shadow-[0_0_12px_rgba(246,198,35,0.7)]"
-            style={{ width: `${Math.round(progress)}%` }}
-          />
+        {/* Laser Precision Progress Bar */}
+        <div className="w-full max-w-[200px] mb-3">
+          <div className="relative w-full h-[3px] bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
+            {/* Progress Fill with Shimmer */}
+            <div
+              className="absolute left-0 top-0 bottom-0 rounded-full bg-gradient-to-r from-[#2F5CF0] via-[#6366F1] to-[#F6C623] transition-all duration-75 ease-out shadow-[0_0_12px_rgba(47,92,240,0.8)]"
+              style={{ width: `${progress}%` }}
+            >
+              {/* Shimmer Light Reflection */}
+              <div className="absolute inset-0 w-full bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.8)_50%,transparent_100%)] animate-[shimmer_1.5s_infinite]" />
+            </div>
+          </div>
         </div>
 
-        {/* Status Text & Numerical Percentage */}
-        <div className="w-full flex items-center justify-between font-mono text-[11px] text-[#8A92B5]">
-          <span className="truncate pr-2">{statusText}</span>
-          <span className="font-bold text-white shrink-0">
-            {Math.round(progress)}%
-          </span>
+        {/* Percentage Counter */}
+        <div className="flex items-center justify-center font-mono text-[10px] tracking-wider text-[#B7BEDB]/80 font-medium">
+          <span>{progress}%</span>
         </div>
       </div>
     </div>
