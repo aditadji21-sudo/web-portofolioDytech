@@ -20,6 +20,8 @@ const CATEGORY_IMAGE: Record<string, typeof imgPc> = {
   "Servis & Upgrade": imgServis,
   Speaker: imgAksesoris,
   Printer: imgAksesoris,
+  "RAM/SSD": imgAksesoris,
+  SSD: imgAksesoris,
   Monitor: imgPc,
   Komponen: imgPc,
 };
