@@ -64,7 +64,13 @@ export async function Categories() {
 
         <div className="grid grid-cols-3 gap-y-6 sm:gap-y-10 gap-x-3 sm:gap-x-6 max-w-3xl mx-auto">
           {CATEGORIES.map((c, i) => {
-            const count = products.filter((p) => p.category === c.title).length;
+            const count = products.filter((p) => {
+              if (c.title === "RAM/SSD") {
+                const cat = (p.category ?? "").trim().toLowerCase();
+                return cat === "ram/ssd" || cat === "ssd" || cat === "ram" || cat === "ram / ssd";
+              }
+              return p.category === c.title;
+            }).length;
             return <CategoryCircle key={c.title} item={c} count={count} delay={i * 70} />;
           })}
         </div>

@@ -113,7 +113,16 @@ export function ProductGrid({ products }: { products: Product[] }) {
     router.push(qs ? `/produk?${qs}` : "/produk", { scroll: false });
   };
 
-  let filtered = active === "Semua" ? products : products.filter((p) => p.category === active);
+  let filtered =
+    active === "Semua"
+      ? products
+      : products.filter((p) => {
+          if (active === "RAM/SSD") {
+            const cat = (p.category ?? "").trim().toLowerCase();
+            return cat === "ram/ssd" || cat === "ssd" || cat === "ram" || cat === "ram / ssd";
+          }
+          return p.category === active;
+        });
 
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
