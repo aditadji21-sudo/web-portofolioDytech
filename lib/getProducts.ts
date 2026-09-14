@@ -76,7 +76,15 @@ export async function getAllProducts(): Promise<Product[]> {
     if (!res.ok) throw new Error(`opensheet merespons status ${res.status}`);
 
     const rows = (await res.json()) as SheetRow[];
-    const products = rows.map(toProduct).filter((p): p is Product => p !== null);
+    const seen = new Set<string>();
+    const products: Product[] = [];
+    for (const r of rows) {
+      const p = toProduct(r);
+      if (p && !seen.has(p.slug)) {
+        seen.add(p.slug);
+        products.push(p);
+      }
+    }
 
     return products.length > 0 ? products : STATIC_PRODUCTS;
   } catch (err) {
