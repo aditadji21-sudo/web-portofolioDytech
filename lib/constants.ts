@@ -63,8 +63,8 @@ export const CATEGORIES: Category[] = [
     icon: "speaker",
   },
   {
-    title: "SSD",
-    desc: "SSD SATA & NVMe berbagai kapasitas untuk upgrade kecepatan PC atau laptop.",
+    title: "RAM/SSD",
+    desc: "RAM & SSD (SATA, NVMe, SODIMM) berbagai kapasitas untuk upgrade PC atau laptop.",
     accent: BRAND.blue,
     icon: "ssd",
   },
