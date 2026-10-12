@@ -30,10 +30,9 @@ export function Hero() {
 
   return (
     <section className="relative w-full overflow-hidden bg-gradient-to-b from-white via-[#F3F5FB] to-[#E8ECF8]">
-      {/* Soft ambient blobs — using DESIGN.md primary-fixed-dim (#b4c5ff) tones */}
+      {/* Ambient blobs — two focused accents, no stacking */}
       <div className="pointer-events-none absolute -top-32 -left-24 w-[500px] h-[500px] rounded-full bg-[#DBE1FF]/40 blur-[120px]" />
       <div className="pointer-events-none absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-[#FFE083]/20 blur-[100px]" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 w-[350px] h-[350px] rounded-full bg-[#B4C5FF]/25 blur-[100px]" />
 
       {/* Main Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 md:px-8 pt-8 sm:pt-14 md:pt-20 pb-10 sm:pb-14 md:pb-16">

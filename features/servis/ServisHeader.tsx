@@ -14,7 +14,7 @@ export function ServisHeader() {
             Servis &amp; upgrade, transparan dari awal sampai selesai
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
-            Estimasi biaya disampaikan sebelum pengerjaan — tidak ada biaya tersembunyi. Setiap servis dites
+            Estimasi biaya disampaikan sebelum pengerjaan, tidak ada biaya tersembunyi. Setiap servis dites
             langsung di depan Anda sebelum unit dikembalikan.
           </p>
         </Reveal>

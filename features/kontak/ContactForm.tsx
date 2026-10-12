@@ -61,7 +61,7 @@ export function ContactForm() {
           <textarea
             required
             rows={4}
-            placeholder="Ceritakan kebutuhan kamu — mau rakit PC, servis, atau tanya produk."
+            placeholder="Ceritakan kebutuhan kamu, mau rakit PC, servis, atau tanya produk."
             className="w-full mt-2 bg-[#F7F8FC] border border-[#E1E4EF] rounded-xl px-4 py-2.5 font-body text-sm text-[#12162A] placeholder:text-[#8890A6] focus:outline-none focus:border-[#2F5CF0] focus:bg-white transition-colors resize-none"
           />
         </div>

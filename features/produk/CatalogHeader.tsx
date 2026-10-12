@@ -14,7 +14,7 @@ export function CatalogHeader() {
             Produk &amp; layanan Dytech Computer
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
-            Semua unit rakitan, laptop, aksesoris, dan paket servis kami — harga bisa berubah sesuai ketersediaan
+            Semua unit rakitan, laptop, aksesoris, dan paket servis kami, harga bisa berubah sesuai ketersediaan
             komponen. Hubungi kami untuk konfirmasi stok terbaru.
           </p>
         </Reveal>

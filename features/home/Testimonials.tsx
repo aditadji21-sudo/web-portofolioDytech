@@ -36,22 +36,9 @@ const col2Mobile = testimonials.filter((_, i) => i % 2 !== 0);
 export function Testimonials() {
   return (
     <section className="relative py-10 sm:py-16 md:py-24 overflow-hidden bg-gradient-to-b from-[#F2F6FE] via-[#E7EEFD] to-[#F1F5FD] border-y border-[#D6E2FA]/80">
-      {/* Subtle Tech Grid Pattern */}
-      <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(to_right,rgba(47,92,240,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(47,92,240,0.06)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,black_40%,transparent_100%)] opacity-80" />
-
-      {/* Central Spotlight Glow */}
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.9),transparent_65%)]" />
-
-      {/* Vibrant Ambient Glow Blobs */}
+      {/* Two focused ambient blobs — no stacking */}
       <div className="pointer-events-none absolute -top-24 -left-20 w-[520px] h-[520px] rounded-full bg-[#2F5CF0]/18 blur-[130px]" />
       <div className="pointer-events-none absolute top-1/2 -right-20 -translate-y-1/2 w-[460px] h-[460px] rounded-full bg-[#F6C623]/16 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-24 left-1/4 w-[420px] h-[420px] rounded-full bg-[#4F46E5]/12 blur-[110px]" />
-
-      {/* Decorative Tech Rings & Accents */}
-      <div className="pointer-events-none absolute top-10 -left-12 w-64 h-64 rounded-full border border-[#2F5CF0]/12 border-dashed" />
-      <div className="pointer-events-none absolute top-16 -left-6 w-52 h-52 rounded-full border border-[#2F5CF0]/10" />
-      <div className="pointer-events-none absolute bottom-12 -right-16 w-80 h-80 rounded-full border border-[#F6C623]/15 border-dashed" />
-      <div className="pointer-events-none absolute bottom-20 -right-8 w-64 h-64 rounded-full border border-[#2F5CF0]/10" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Header */}
@@ -68,11 +55,11 @@ export function Testimonials() {
           </span>
 
           <h2 className="font-montserrat font-extrabold text-2xl sm:text-3xl md:text-4xl text-[#0E1226] tracking-tight">
-            Dipercaya Ribuan Pelanggan
+            Lihat Bukti Pelanggan Kami
           </h2>
 
           <p className="font-body text-[#53607E] text-[13px] sm:text-sm md:text-base mt-3 max-w-md leading-relaxed font-medium">
-            Lihat langsung testimoni asli dari pelanggan yang sudah berbelanja dan servis di Dytech Computer.
+            Foto dan pesan asli dari pelanggan yang sudah berbelanja atau servis di Dytech Computer.
           </p>
         </motion.div>
 

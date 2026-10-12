@@ -14,7 +14,7 @@ export function CtaStrip() {
               Mau rakit PC atau ada unit yang butuh servis?
             </h3>
             <p className="font-body text-[#B7BEDB] mt-2 sm:mt-3 max-w-sm text-[13px] sm:text-sm leading-relaxed">
-              Datang langsung ke toko kami atau konsultasi via WhatsApp — tim teknisi kami bantu pilihkan spek terbaik dan estimasi biaya transparan.
+              Datang langsung ke toko kami atau konsultasi via WhatsApp, tim teknisi kami bantu pilihkan spek terbaik dan estimasi biaya transparan.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:gap-3.5 relative font-body text-[13px] sm:text-sm w-full md:w-auto">

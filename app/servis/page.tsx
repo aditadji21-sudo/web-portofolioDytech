@@ -5,7 +5,7 @@ import { ServicePackages } from "@/features/servis/ServicePackages";
 import { CtaStrip } from "@/features/home/CtaStrip";
 
 export const metadata: Metadata = {
-  title: "Servis & Upgrade — Dytech Computer",
+  title: "Servis &amp; Upgrade, Dytech Computer",
   description: "Diagnosa, perbaikan, dan upgrade komputer dengan alur kerja transparan di Dytech Computer.",
 };
 

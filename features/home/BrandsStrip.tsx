@@ -100,16 +100,12 @@ export function BrandsStrip() {
         </div>
       </div>
 
-      {/* Seamless Flowing Transition from Dark Section to Light Canvas (#F3F5FB) */}
+      {/* Transition to light canvas — simplified wave */}
       <div className="relative w-full mt-8 sm:mt-14">
-        {/* Soft Ambient Aurora Atmosphere */}
-        <div className="pointer-events-none absolute -top-12 inset-x-0 h-36 bg-gradient-to-r from-[#2F5CF0]/30 via-[#F6C623]/35 via-[#F0323B]/30 to-[#5C82FF]/30 blur-3xl animate-gradient-flow animate-aurora" />
-
-        {/* Ambient Pulsing Glow Orbs */}
+        {/* Single ambient pulse — no aurora stacking */}
         <div className="pointer-events-none absolute -top-8 left-1/4 w-80 h-28 rounded-full bg-[#2F5CF0]/25 blur-[80px] animate-pulse-soft" />
-        <div className="pointer-events-none absolute -top-8 right-1/4 w-80 h-28 rounded-full bg-[#F6C623]/25 blur-[80px] animate-pulse-soft" />
 
-        {/* Smooth Organic Layered Wave Transition directly flush with the bottom */}
+        {/* Clean wave transition directly flush with the bottom */}
         <div className="relative z-20 w-full overflow-hidden leading-none -mb-[1px]">
           <svg
             className="relative block w-full h-16 sm:h-24 md:h-28 text-[#F3F5FB]"
@@ -118,35 +114,17 @@ export function BrandsStrip() {
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
           >
-            {/* Layer 1: Animated Soft Brand Hue Wave */}
-            <path
-              d="M0,45 C280,105 480,15 720,60 C960,105 1200,20 1440,65 L1440,140 L0,140 Z"
-              fill="url(#brandWaveGrad)"
-              opacity="0.3"
-              className="animate-wave-slow"
-            />
-
-            {/* Layer 2: Intermediate Soft Tint Wave */}
             <path
               d="M0,60 C320,115 540,30 840,75 C1140,120 1320,40 1440,80 L1440,140 L0,140 Z"
               fill="#E1E8F8"
               opacity="0.8"
             />
 
-            {/* Layer 3: Solid Canvas Transition Wave */}
             <path
               d="M0,78 C360,135 620,45 960,92 C1220,130 1360,55 1440,95 L1440,140 L0,140 Z"
               fill="#F3F5FB"
             />
 
-            <defs>
-              <linearGradient id="brandWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#2F5CF0" />
-                <stop offset="40%" stopColor="#F6C623" />
-                <stop offset="75%" stopColor="#F0323B" />
-                <stop offset="100%" stopColor="#5C82FF" />
-              </linearGradient>
-            </defs>
           </svg>
         </div>
       </div>

@@ -15,7 +15,7 @@ export function AboutHeader() {
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
             Dytech Computer berawal dari meja servis kecil di Malang. Sekarang kami merakit PC, menjual laptop
-            &amp; aksesoris, dan menangani servis — dengan prinsip yang sama sejak awal: jelaskan dulu, baru kerjakan.
+            &amp; aksesoris, dan menangani servis, dengan prinsip yang sama sejak awal: jelaskan dulu, baru kerjakan.
           </p>
         </Reveal>
 

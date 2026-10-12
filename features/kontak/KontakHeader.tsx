@@ -14,7 +14,7 @@ export function KontakHeader() {
             Ada yang mau ditanyakan dulu?
           </h1>
           <p className="font-body text-[#667085] mt-3 max-w-lg leading-relaxed text-sm md:text-base">
-            Isi form di bawah atau hubungi kami langsung — kami balas secepatnya di jam operasional.
+            Isi form di bawah atau hubungi kami langsung, kami balas secepatnya di jam operasional.
           </p>
         </Reveal>
       </div>

@@ -150,7 +150,7 @@ export function ProductDetail({ product, allProducts }: { product: Product; allP
             <div className="rounded-xl sm:rounded-2xl border border-[#EAECF5] bg-[#F9FAFD] p-3.5 sm:p-4 mb-5 sm:mb-6">
               <p className="font-body text-xs font-semibold text-[#12162A] mb-1">Informasi Stok</p>
               <p className="font-body text-xs sm:text-sm text-[#3AA76D] font-medium">
-                {product.stock ?? "Tersedia — hubungi kami untuk konfirmasi stok terbaru"}
+                {product.stock ?? "Tersedia, hubungi kami untuk konfirmasi stok terbaru"}
               </p>
             </div>
 
