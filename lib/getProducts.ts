@@ -1,6 +1,7 @@
 import { ALL_PRODUCTS as STATIC_PRODUCTS } from "./all-products";
 import type { Product, Processor } from "./constants";
 import { gdriveImageUrl, gdriveImageUrls } from "./gdrive";
+import { FOTO_LOKAL } from "./fotoLokal";
 
 // Isi SHEET_ID & SHEET_NAME di file .env.local (lihat .env.local.example).
 // Kalau belum di-set, web otomatis pakai data statis di /lib sebagai fallback
@@ -20,6 +21,8 @@ function splitList(value: string | undefined): string[] {
 function toProduct(row: SheetRow): Product | null {
   if (!row.slug?.trim() || !row.name?.trim()) return null;
 
+  const slug = row.slug.trim();
+
   const processor: Processor | undefined = row.processor_name?.trim()
     ? {
         name: row.processor_name,
@@ -37,18 +40,21 @@ function toProduct(row: SheetRow): Product | null {
 
   // Field image & images otomatis di-convert dari Google Drive file ID/URL
   // ke direct image link. Path lokal tetap jalan apa adanya (backward compatible).
+  // Kalau kolom `image` di spreadsheet kosong, pakai foto lokal hasil kurasi
+  // dari lib/fotoLokal.ts supaya produk tetap punya gambar.
   const rawImage = row.image?.trim() || undefined;
   const cleanImage = (rawImage === "photo_attached" || rawImage === "undefined" || rawImage === "null" || rawImage === "-") ? undefined : rawImage;
+  const gambarFinal = cleanImage ?? FOTO_LOKAL[slug];
   const rawImages = row.images ? splitList(row.images) : undefined;
 
   return {
-    slug: row.slug.trim(),
+    slug,
     name: row.name.trim(),
     category: row.category?.trim() ?? "",
     price: row.price?.trim() ?? "",
     specs: splitList(row.specs),
     badge: row.badge?.trim() || undefined,
-    image: gdriveImageUrl(cleanImage),
+    image: gdriveImageUrl(gambarFinal),
     images: gdriveImageUrls(rawImages),
     description: row.description?.trim() || undefined,
     stock: row.stock?.trim() || undefined,
