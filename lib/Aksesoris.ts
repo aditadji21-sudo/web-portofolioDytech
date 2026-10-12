@@ -9,20 +9,4 @@ export const AKSESORIS: Product[] = [
     specs: ["Hot-swappable", "RGB Backlight", "Kabel USB-C"],
     image: "/KEYBOARD FANTECH ATOM- 61 MK211.svg",
   },
-  {
-    slug: "mx-air-wireless",
-    name: "Mouse Wireless Dytech MX Air",
-    category: "Aksesoris",
-    price: "Rp 180.000",
-    specs: ["2.4GHz + Bluetooth", "4800 DPI", "Baterai 3 bulan"],
-    image: "/Mouse Wireless  Fantech Go W608.svg",
-  },
-  {
-    slug: "sonic-h7-headset",
-    name: "Headset Gaming Dytech Sonic H7",
-    category: "Aksesoris",
-    price: "Rp 275.000",
-    specs: ["7.1 Surround", "Mic Detachable", "Earcup Memory Foam"],
-    image: "/Mouse Gaming Rexus Xierra X18 RIFLE.svg",
-  },
 ];
