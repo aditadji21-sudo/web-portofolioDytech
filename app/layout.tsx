@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { TopBar } from "@/components/TopBar";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -7,11 +7,11 @@ import { Preloader } from "@/components/Preloader";
 import { getAllProducts } from "@/lib/getProducts";
 import "./globals.css";
 
-const montserrat = Montserrat({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-montserrat",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const inter = Inter({
@@ -36,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const products = await getAllProducts();
 
   return (
-    <html lang="id" className={`${montserrat.variable} ${inter.variable}`}>
+    <html lang="id" className={`${jakarta.variable} ${inter.variable}`}>
       <body className="min-h-screen bg-[#F3F5FB] selection:bg-[#F6C623] selection:text-[#12162A] antialiased font-body">
         <Preloader />
         <TopBar />
